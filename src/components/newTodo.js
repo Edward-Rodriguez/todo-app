@@ -12,7 +12,7 @@ export default function createTodo(
   return newTodo;
 }
 
-function Todo(title, dueDate, priority, project, notes, checklist) {
+function Todo(title, dueDate, priority, project, notes, checklist = []) {
   const id = ++todoId;
 
   return {

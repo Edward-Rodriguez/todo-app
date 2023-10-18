@@ -1,0 +1,11 @@
+[
+  {
+    "id": 0,
+    "title": "Initial todo",
+    "dueDate": "Oct-21",
+    "priority": "high",
+    "project": "Daily",
+    "notes": "Testing notes",
+    "checklist": ["todo test 1", "todo test 2", "todo test 3"]
+  }
+]
