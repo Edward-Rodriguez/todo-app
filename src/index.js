@@ -10,8 +10,8 @@ const new_todo2 = Todo(
   'Exercise for 30min',
   format(new Date(2023, 9, 17), 'MMM-dd'),
   'high',
-  '',
-  '',
+  'Daily',
+  'Interval training on exercise bike',
   ['read', 'new vocab']
 );
 

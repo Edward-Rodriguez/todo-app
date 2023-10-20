@@ -1,5 +1,6 @@
 .todo-container {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 12px;
   border: 2px solid grey;
@@ -8,4 +9,36 @@
 
 .todo-container img:hover {
   cursor: pointer;
+}
+
+.dropdown {
+  width: 100%;
+  display: grid;
+  grid-template: min-content auto auto/ min-content auto min-content;
+  grid-template-areas:
+    'project priority edit'
+    'notes notes notes'
+    'checklist checklist checklist';
+  border-top: 1px solid lightgrey;
+  justify-content: space-between;
+}
+
+.project {
+  grid-area: project;
+}
+
+.priority {
+  grid-area: priority;
+}
+
+.dropdown img {
+  grid-area: edit;
+}
+
+.notes {
+  grid-area: notes;
+}
+
+.checklist {
+  grid-area: checklist;
 }
