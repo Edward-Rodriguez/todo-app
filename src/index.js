@@ -12,6 +12,6 @@ const new_todo2 = Todo(
 
 storage.addTodo(new_todo);
 storage.addTodo(new_todo2);
-console.log(storage.getTodos());
+console.log(storage.todos);
 storage.removeTodo(new_todo2.id);
-console.log(storage.getTodos());
+console.log(storage.todos);

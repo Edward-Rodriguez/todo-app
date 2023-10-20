@@ -1,15 +1,12 @@
 export default function Storage() {
   const todos_key = 'todos';
+  const projects_key = 'projects';
   let todos = [];
+  let projects = [];
 
   function addTodo(todo) {
     todos.push(todo);
     localStorage.setItem(todos_key, JSON.stringify(todos));
-  }
-
-  function getTodos() {
-    todos = JSON.parse(localStorage.getItem(todos_key));
-    return todos;
   }
 
   function removeTodo(todoId) {
@@ -19,5 +16,30 @@ export default function Storage() {
     );
   }
 
-  return { addTodo, getTodos, removeTodo };
+  function addProject(project) {
+    projects.push(project);
+    localStorage.setItem(projects_key, JSON.stringify(projects));
+  }
+
+  function removeProject(projectId) {
+    localStorage.setItem(
+      projects_key,
+      JSON.stringify(projects.filter((project) => project.id !== projectId))
+    );
+  }
+
+  return {
+    addTodo,
+    removeTodo,
+    addProject,
+    removeProject,
+    get todos() {
+      todos = JSON.parse(localStorage.getItem(todos_key));
+      return todos;
+    },
+    get projects() {
+      projects = JSON.parse(localStorage.getItem(projects_key));
+      return projects;
+    },
+  };
 }
