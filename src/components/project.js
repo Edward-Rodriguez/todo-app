@@ -1,11 +1,6 @@
 let projectId = 0;
 
-export default function newProject(title, todos) {
-  const newProject = Project(title, todos);
-  return newProject;
-}
-
-function Project(title, todos) {
+export default function Project(title, todos) {
   const id = ++projectId;
 
   return {

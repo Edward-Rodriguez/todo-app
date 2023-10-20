@@ -1,13 +1,11 @@
 import format from 'date-fns/format';
-import newTodo from './components/newTodo';
-import local_storage from './components/storage';
+import Todo from './components/todo';
+import Project from './components/project';
+import Storage from './components/storage';
 
-const storage = local_storage();
-const new_todo = newTodo(
-  'Read 5 pages',
-  format(new Date(2023, 9, 18), 'MMM-dd')
-);
-const new_todo2 = newTodo(
+const storage = Storage();
+const new_todo = Todo('Read 5 pages', format(new Date(2023, 9, 18), 'MMM-dd'));
+const new_todo2 = Todo(
   'Exercise for 30min',
   format(new Date(2023, 9, 17), 'MMM-dd')
 );

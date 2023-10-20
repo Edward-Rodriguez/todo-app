@@ -1,4 +1,4 @@
-export default function storage() {
+export default function Storage() {
   const todos_key = 'todos';
   let todos = [];
 

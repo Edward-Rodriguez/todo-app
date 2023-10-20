@@ -1,18 +1,13 @@
 let todoId = 0;
 
-export default function newTodo(
+export default function Todo(
   title,
   dueDate,
   priority,
   project,
   notes,
-  checklist
+  checklist = []
 ) {
-  const newTodo = Todo(title, dueDate, priority, project, notes, checklist);
-  return newTodo;
-}
-
-function Todo(title, dueDate, priority, project, notes, checklist = []) {
   const id = ++todoId;
 
   return {
