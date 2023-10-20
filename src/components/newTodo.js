@@ -1,6 +1,6 @@
 let todoId = 0;
 
-export default function createTodo(
+export default function newTodo(
   title,
   dueDate,
   priority,
