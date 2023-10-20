@@ -10,6 +10,10 @@ export default function Todo(
 ) {
   const id = ++todoId;
 
+  function addChecklistItem(newChecklistItem) {
+    checklist.push(newChecklistItem);
+  }
+
   return {
     get id() {
       return id;
@@ -47,5 +51,6 @@ export default function Todo(
     get checklist() {
       return checklist;
     },
+    addChecklistItem,
   };
 }

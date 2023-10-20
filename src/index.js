@@ -1,17 +1,19 @@
 import format from 'date-fns/format';
-import Todo from './components/todo';
-import Project from './components/project';
-import Storage from './components/storage';
+import Todo from './todo';
+import Project from './project';
+import Storage from './storage';
+import todoItem from './components/todoItem/todoItem';
 
 const storage = Storage();
 const new_todo = Todo('Read 5 pages', format(new Date(2023, 9, 18), 'MMM-dd'));
 const new_todo2 = Todo(
   'Exercise for 30min',
-  format(new Date(2023, 9, 17), 'MMM-dd')
+  format(new Date(2023, 9, 17), 'MMM-dd'),
+  'high',
+  '',
+  '',
+  ['read', 'new vocab']
 );
 
-storage.addTodo(new_todo);
-storage.addTodo(new_todo2);
-console.log(storage.todos);
-storage.removeTodo(new_todo2.id);
-console.log(storage.todos);
+const container = document.querySelector('#content');
+container.appendChild(todoItem(new_todo2));

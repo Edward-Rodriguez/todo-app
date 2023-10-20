@@ -1,0 +1,11 @@
+.todo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 2px solid grey;
+  border-radius: 8px;
+}
+
+.todo-container img:hover {
+  cursor: pointer;
+}
