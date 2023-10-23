@@ -6,11 +6,6 @@
   border: 2px solid grey;
   border-radius: 8px;
 }
-
-.todo-container img:hover {
-  cursor: pointer;
-}
-
 .dropdown {
   width: 100%;
   display: grid;
@@ -41,4 +36,11 @@
 
 .checklist {
   grid-area: checklist;
+}
+
+.todo-container button {
+  cursor: pointer;
+  border: none;
+  appearance: none;
+  background-color: inherit;
 }

@@ -9,8 +9,10 @@ export default function todoItem(todo) {
   const checkBox = document.createElement('input');
   const titleLabel = document.createElement('label');
   const dueDate = document.createElement('div');
-  const dropdownIcon = document.createElement('img');
-  const deleteButton = document.createElement('img');
+  const dropdownButton = document.createElement('button');
+  const dropdownImage = document.createElement('img');
+  const deleteButton = document.createElement('button');
+  const deleteImage = document.createElement('img');
 
   todoDiv.classList.add('todo-container');
   todoDiv.dataset.todoId = todo.id;
@@ -19,14 +21,16 @@ export default function todoItem(todo) {
   titleLabel.setAttribute('for', todo.id);
   titleLabel.textContent = todo.title;
   dueDate.textContent = todo.dueDate;
-  dropdownIcon.src = DropdownIcon;
-  deleteButton.src = DeleteIcon;
+  dropdownImage.src = DropdownIcon;
+  deleteImage.src = DeleteIcon;
 
+  dropdownButton.appendChild(dropdownImage);
+  deleteButton.appendChild(deleteImage);
   todoDiv.append(
     checkBox,
     titleLabel,
     dueDate,
-    dropdownIcon,
+    dropdownButton,
     deleteButton,
     dropdownContent(todo)
   );
@@ -38,7 +42,8 @@ function dropdownContent(todo) {
   const dropdownContainer = document.createElement('div');
   const project = document.createElement('div');
   const priority = document.createElement('div');
-  const editButton = document.createElement('img');
+  const editButton = document.createElement('button');
+  const editImage = document.createElement('img');
   const notes = document.createElement('p');
   const checklist = checklistContent(todo.checklist);
 
@@ -47,12 +52,24 @@ function dropdownContent(todo) {
   project.textContent = todo.project;
   priority.classList.add('priority');
   priority.textContent = `Priority: ${todo.priority}`;
-  editButton.src = EditIcon;
+  editImage.src = EditIcon;
   notes.classList.add('notes');
   notes.textContent = todo.notes;
   checklist.classList.add('checklist');
 
+  editButton.appendChild(editImage);
   dropdownContainer.append(project, priority, editButton, notes, checklist);
 
   return dropdownContainer;
+}
+
+function checklistContent(checklist) {
+  const checklistContainer = document.createElement('div');
+
+  checklist.forEach((item, index) => {
+    const checkbox = document.createElement('input');
+    checkbox.setAttribute('type', 'checkbox');
+    //   const label
+  });
+  return checklistContainer;
 }

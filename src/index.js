@@ -3,6 +3,7 @@ import Todo from './todo';
 import Project from './project';
 import Storage from './storage';
 import todoItem from './components/todoItem/todoItem';
+import './index.css';
 
 const storage = Storage();
 const new_todo = Todo('Read 5 pages', format(new Date(2023, 9, 18), 'MMM-dd'));
