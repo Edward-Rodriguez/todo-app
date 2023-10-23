@@ -19,7 +19,9 @@ export default function todoItem(todo) {
 
   todoDiv.classList.add('todo-container');
   todoDiv.dataset.todoId = todo.id;
+  //   todoDiv.style.borderColor = `var('--priority-${todo.priority}-color')`;
   checkBox.setAttribute('type', 'checkbox');
+  checkBox.classList.add(todo.priority);
   titleSpan.textContent = todo.title;
   dueDate.classList.add('due-date');
   dueDate.textContent = todo.dueDate;

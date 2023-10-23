@@ -19,7 +19,16 @@ const new_todo2 = Todo(
     'do arm strengthning exercises while biking',
   ]
 );
+const new_todo3 = Todo(
+  'Walk the dog',
+  format(new Date(2023, 9, 17), 'MMM-dd'),
+  'medium',
+  'Daily',
+  'Interval training on exercise bike',
+  ['read while biking', 'do arm strengthning exercises while biking']
+);
 
 const container = document.querySelector('#content');
 container.appendChild(todoItem(new_todo2));
 container.appendChild(todoItem(new_todo));
+container.appendChild(todoItem(new_todo3));

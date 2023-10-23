@@ -1,8 +1,7 @@
 :root {
-  --priority-low-color: #6d6d6d;
-  --priority-med-color: #ba8249;
+  --priority-low-color: #8a8a8a;
+  --priority-medium-color: #cd9862;
   --priority-high-color: #ba4949;
-  --priority-color: var(--priority-low-color);
 }
 
 .todo-container {
@@ -10,8 +9,8 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
-  border: 1px solid #d3d3d3;
-  border-radius: 8px;
+  border-top: 1px solid #d3d3d3;
+  border-width: 80%;
   padding: 12px;
 }
 
@@ -92,8 +91,16 @@ input[type='checkbox'] {
   width: 20px;
   height: 20px;
   border: 2px solid black;
-  border-color: var(--priority-color);
+  border-color: var(--priority-low-color);
   border-radius: 50%;
+}
+
+input[type='checkbox'].medium {
+  border-color: var(--priority-medium-color);
+}
+
+input[type='checkbox'].high {
+  border-color: var(--priority-high-color);
 }
 
 input[type='checkbox']:hover {
@@ -111,7 +118,15 @@ input[type='checkbox']::before {
 }
 
 input[type='checkbox']:checked {
-  background-color: var(--priority-color);
+  background-color: var(--priority-low-color);
+}
+
+input[type='checkbox'].medium:checked {
+  background-color: var(--priority-medium-color);
+}
+
+input[type='checkbox'].high:checked {
+  background-color: var(--priority-high-color);
 }
 
 input[type='checkbox']:checked::before {

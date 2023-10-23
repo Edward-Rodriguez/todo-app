@@ -13,3 +13,8 @@ html {
   margin: 0;
   padding: 0;
 }
+
+#content {
+  display: grid;
+  padding: 24px;
+}
