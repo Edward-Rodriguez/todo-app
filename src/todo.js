@@ -4,7 +4,7 @@ export default function Todo(
   title,
   dueDate,
   priority,
-  project,
+  project = 'Home',
   notes,
   checklist = []
 ) {

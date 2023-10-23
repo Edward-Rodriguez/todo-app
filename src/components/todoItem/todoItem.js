@@ -2,12 +2,14 @@ import DropdownIcon from './drop-down-icon.svg';
 import DropUpIcon from './drop-up-icon.svg';
 import DeleteIcon from './delete-icon.svg';
 import EditIcon from './edit-icon.svg';
+
 import './todoItem.css';
 
 export default function todoItem(todo) {
   const todoDiv = document.createElement('div');
   const checkBox = document.createElement('input');
   const titleLabel = document.createElement('label');
+  const titleSpan = document.createElement('span');
   const dueDate = document.createElement('div');
   const buttonContainer = document.createElement('div');
   const dropdownButton = document.createElement('button');
@@ -18,9 +20,7 @@ export default function todoItem(todo) {
   todoDiv.classList.add('todo-container');
   todoDiv.dataset.todoId = todo.id;
   checkBox.setAttribute('type', 'checkbox');
-  checkBox.setAttribute('id', todo.id);
-  titleLabel.setAttribute('for', todo.id);
-  titleLabel.textContent = todo.title;
+  titleSpan.textContent = todo.title;
   dueDate.classList.add('due-date');
   dueDate.textContent = todo.dueDate;
   buttonContainer.classList.add('button-container');
@@ -28,16 +28,12 @@ export default function todoItem(todo) {
   dropdownImage.src = DropdownIcon;
   deleteImage.src = DeleteIcon;
 
+  titleLabel.prepend(checkBox);
+  titleLabel.append(titleSpan);
   buttonContainer.append(dropdownButton, deleteButton);
   dropdownButton.appendChild(dropdownImage);
   deleteButton.appendChild(deleteImage);
-  todoDiv.append(
-    checkBox,
-    titleLabel,
-    dueDate,
-    buttonContainer,
-    dropdownContent(todo)
-  );
+  todoDiv.append(titleLabel, dueDate, buttonContainer, dropdownContent(todo));
 
   dropdownButton.addEventListener('click', clickHandlerDropdown);
   return todoDiv;
@@ -75,12 +71,15 @@ function checklistContent(checklist) {
     const itemContainer = document.createElement('div');
     const checkbox = document.createElement('input');
     const label = document.createElement('label');
+    const span = document.createElement('span');
 
     itemContainer.classList.add('checklist-item');
     itemContainer.setAttribute('id', index);
     checkbox.setAttribute('type', 'checkbox');
-    label.textContent = item;
-    itemContainer.append(checkbox, label);
+    span.textContent = item;
+    label.prepend(checkbox);
+    label.append(span);
+    itemContainer.appendChild(label);
     checklistContainer.appendChild(itemContainer);
   });
   return checklistContainer;

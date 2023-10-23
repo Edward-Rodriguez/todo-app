@@ -1,9 +1,16 @@
+:root {
+  --priority-low-color: #6d6d6d;
+  --priority-med-color: #ba8249;
+  --priority-high-color: #ba4949;
+  --priority-color: var(--priority-low-color);
+}
+
 .todo-container {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
-  border: 1px solid lightgrey;
+  border: 1px solid #d3d3d3;
   border-radius: 8px;
   padding: 12px;
 }
@@ -22,6 +29,8 @@
     'checklist checklist checklist';
   border-top: 1px solid lightgrey;
   justify-content: space-between;
+  padding-top: 8px;
+  align-items: center;
 }
 
 .hidden {
@@ -46,7 +55,6 @@
 
 .checklist {
   grid-area: checklist;
-  padding-left: 12px;
 }
 
 .notes,
@@ -62,9 +70,69 @@
   background-color: inherit;
 }
 
+.todo-container label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .due-date {
-  background-color: #faf7f8;
+  background-color: #eeeeee;
+  border-radius: 4px;
   place-self: center;
   font-size: 0.8rem;
   color: rgb(45, 45, 45);
+  padding: 2px;
+}
+
+/* Styling checkboxes reference: https://developer.mozilla.org/en-US/docs/Learn/Forms/Advanced_form_styling */
+input[type='checkbox'] {
+  appearance: none;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 2px solid black;
+  border-color: var(--priority-color);
+  border-radius: 50%;
+}
+
+input[type='checkbox']:hover {
+  cursor: pointer;
+}
+
+input[type='checkbox']::before {
+  content: '✔';
+  position: absolute;
+  font-size: 1.1em;
+  right: 2px;
+  visibility: hidden;
+  top: -2px;
+  color: white;
+}
+
+input[type='checkbox']:checked {
+  background-color: var(--priority-color);
+}
+
+input[type='checkbox']:checked::before {
+  visibility: visible;
+}
+
+input:checked + span {
+  font-style: italic;
+  text-decoration: line-through;
+  color: rgb(63, 63, 63);
+}
+
+.checklist-item input[type='checkbox'] {
+  opacity: 0.8;
+  border-radius: 2px;
+  width: 16px;
+  height: 16px;
+}
+
+.checklist-item input[type='checkbox']::before {
+  font-size: 1em;
+  right: 1px;
+  top: -3px;
 }
