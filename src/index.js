@@ -13,8 +13,13 @@ const new_todo2 = Todo(
   'high',
   'Daily',
   'Interval training on exercise bike',
-  ['read', 'new vocab']
+  [
+    'read while biking',
+    'increase intensity by 1',
+    'do arm strengthning exercises while biking',
+  ]
 );
 
 const container = document.querySelector('#content');
 container.appendChild(todoItem(new_todo2));
+container.appendChild(todoItem(new_todo));

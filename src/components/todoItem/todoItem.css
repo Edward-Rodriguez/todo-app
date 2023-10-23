@@ -3,9 +3,15 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
-  border: 2px solid grey;
+  border: 1px solid lightgrey;
   border-radius: 8px;
+  padding: 12px;
 }
+
+.todo-container .button-container {
+  margin-left: auto;
+}
+
 .dropdown {
   width: 100%;
   display: grid;
@@ -16,6 +22,10 @@
     'checklist checklist checklist';
   border-top: 1px solid lightgrey;
   justify-content: space-between;
+}
+
+.hidden {
+  display: none;
 }
 
 .project {
@@ -36,6 +46,13 @@
 
 .checklist {
   grid-area: checklist;
+  padding-left: 12px;
+}
+
+.notes,
+.checklist {
+  font-size: 0.9rem;
+  color: rgb(45, 45, 45);
 }
 
 .todo-container button {
@@ -43,4 +60,11 @@
   border: none;
   appearance: none;
   background-color: inherit;
+}
+
+.due-date {
+  background-color: #faf7f8;
+  place-self: center;
+  font-size: 0.8rem;
+  color: rgb(45, 45, 45);
 }
