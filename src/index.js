@@ -2,7 +2,7 @@ import format from 'date-fns/format';
 import Todo from './todo';
 import Project from './project';
 import Storage from './storage';
-import todoComponent from './components/todoItem/todoItem';
+import todoComponent from './components/todoContainer/todoContainer';
 import './index.css';
 
 const storage = Storage();

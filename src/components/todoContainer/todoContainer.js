@@ -3,8 +3,7 @@ import DropUpIcon from './drop-up-icon.svg';
 import DeleteIcon from './delete-icon.svg';
 import EditIcon from './edit-icon.svg';
 import Storage from '../../storage';
-
-import './todoItem.css';
+import './todoContainer.css';
 
 export default function todoContainer(todo) {
   const todoDiv = document.createElement('div');
