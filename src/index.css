@@ -16,5 +16,6 @@ html {
 
 #content {
   display: grid;
+  gap: 12px;
   padding: 24px;
 }

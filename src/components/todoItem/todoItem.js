@@ -2,10 +2,11 @@ import DropdownIcon from './drop-down-icon.svg';
 import DropUpIcon from './drop-up-icon.svg';
 import DeleteIcon from './delete-icon.svg';
 import EditIcon from './edit-icon.svg';
+import Storage from '../../storage';
 
 import './todoItem.css';
 
-export default function todoItem(todo) {
+export default function todoContainer(todo) {
   const todoDiv = document.createElement('div');
   const checkBox = document.createElement('input');
   const titleLabel = document.createElement('label');
@@ -19,7 +20,6 @@ export default function todoItem(todo) {
 
   todoDiv.classList.add('todo-container');
   todoDiv.dataset.todoId = todo.id;
-  //   todoDiv.style.borderColor = `var('--priority-${todo.priority}-color')`;
   checkBox.setAttribute('type', 'checkbox');
   checkBox.classList.add(todo.priority);
   titleSpan.textContent = todo.title;
@@ -35,72 +35,76 @@ export default function todoItem(todo) {
   buttonContainer.append(dropdownButton, deleteButton);
   dropdownButton.appendChild(dropdownImage);
   deleteButton.appendChild(deleteImage);
-  todoDiv.append(titleLabel, dueDate, buttonContainer, dropdownContent(todo));
+  todoDiv.append(titleLabel, dueDate, buttonContainer, dropdownContainer(todo));
+
+  function dropdownContainer() {
+    const dropdownContainer = document.createElement('div');
+    const project = document.createElement('div');
+    const priority = document.createElement('div');
+    const editButton = document.createElement('button');
+    const editImage = document.createElement('img');
+    const notes = document.createElement('p');
+    const checklist = checklistContainer();
+
+    dropdownContainer.classList.add('dropdown', 'hidden');
+    project.classList.add('project');
+    project.textContent = todo.project;
+    priority.classList.add('priority');
+    priority.textContent = `Priority: ${todo.priority}`;
+    editImage.src = EditIcon;
+    notes.classList.add('notes');
+    notes.textContent = todo.notes;
+    checklist.classList.add('checklist');
+    editButton.appendChild(editImage);
+    dropdownContainer.append(project, priority, editButton, notes, checklist);
+
+    function checklistContainer() {
+      const checklistContainer = document.createElement('div');
+
+      todo.checklist.forEach((item, index) => {
+        const itemContainer = document.createElement('div');
+        const checkbox = document.createElement('input');
+        const label = document.createElement('label');
+        const span = document.createElement('span');
+
+        itemContainer.classList.add('checklist-item');
+        itemContainer.setAttribute('id', index);
+        checkbox.setAttribute('type', 'checkbox');
+        span.textContent = item;
+        label.prepend(checkbox);
+        label.append(span);
+        itemContainer.appendChild(label);
+        checklistContainer.appendChild(itemContainer);
+      });
+      return checklistContainer;
+    }
+
+    return dropdownContainer;
+  }
+
+  function clickHandlerDropdown(ev) {
+    const todoContainer = ev.target.closest('[data-todo-id]'); // parent container
+    const dropdown = todoContainer.querySelector('.dropdown');
+    const dropdownIcon = todoContainer.querySelector('.dropdown-img');
+
+    if (dropdown.classList.contains('hidden')) {
+      dropdown.classList.remove('hidden');
+      dropdownIcon.src = DropUpIcon;
+    } else {
+      dropdown.classList.add('hidden');
+      dropdownIcon.src = DropdownIcon;
+    }
+  }
+
+  function clickHandlerDelete() {
+    todoDiv.parentElement.removeChild(todoDiv);
+    const storage = Storage();
+    storage.removeTodo(todo.id);
+  }
+
+  function clickHandlerEdit() {}
 
   dropdownButton.addEventListener('click', clickHandlerDropdown);
+  deleteButton.addEventListener('click', clickHandlerDelete);
   return todoDiv;
 }
-
-function dropdownContent(todo) {
-  const dropdownContainer = document.createElement('div');
-  const project = document.createElement('div');
-  const priority = document.createElement('div');
-  const editButton = document.createElement('button');
-  const editImage = document.createElement('img');
-  const notes = document.createElement('p');
-  const checklist = checklistContent(todo.checklist);
-
-  dropdownContainer.classList.add('dropdown', 'hidden');
-  project.classList.add('project');
-  project.textContent = todo.project;
-  priority.classList.add('priority');
-  priority.textContent = `Priority: ${todo.priority}`;
-  editImage.src = EditIcon;
-  notes.classList.add('notes');
-  notes.textContent = todo.notes;
-  checklist.classList.add('checklist');
-
-  editButton.appendChild(editImage);
-  dropdownContainer.append(project, priority, editButton, notes, checklist);
-
-  return dropdownContainer;
-}
-
-function checklistContent(checklist) {
-  const checklistContainer = document.createElement('div');
-
-  checklist.forEach((item, index) => {
-    const itemContainer = document.createElement('div');
-    const checkbox = document.createElement('input');
-    const label = document.createElement('label');
-    const span = document.createElement('span');
-
-    itemContainer.classList.add('checklist-item');
-    itemContainer.setAttribute('id', index);
-    checkbox.setAttribute('type', 'checkbox');
-    span.textContent = item;
-    label.prepend(checkbox);
-    label.append(span);
-    itemContainer.appendChild(label);
-    checklistContainer.appendChild(itemContainer);
-  });
-  return checklistContainer;
-}
-
-function clickHandlerDropdown(ev) {
-  const todoContainer = ev.target.closest('[data-todo-id]'); // parent container
-  const dropdown = todoContainer.querySelector('.dropdown');
-  const dropdownIcon = todoContainer.querySelector('.dropdown-img');
-
-  if (dropdown.classList.contains('hidden')) {
-    dropdown.classList.remove('hidden');
-    dropdownIcon.src = DropUpIcon;
-  } else {
-    dropdown.classList.add('hidden');
-    dropdownIcon.src = DropdownIcon;
-  }
-}
-
-function clickHandlerDelete() {}
-
-function clickHandlerEdit() {}

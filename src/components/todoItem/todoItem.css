@@ -9,8 +9,8 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
-  border-top: 1px solid #d3d3d3;
-  border-width: 80%;
+  border: 1px solid #d3d3d3;
+  border-radius: 8px;
   padding: 12px;
 }
 

@@ -2,7 +2,7 @@ import format from 'date-fns/format';
 import Todo from './todo';
 import Project from './project';
 import Storage from './storage';
-import todoItem from './components/todoItem/todoItem';
+import todoComponent from './components/todoItem/todoItem';
 import './index.css';
 
 const storage = Storage();
@@ -28,7 +28,11 @@ const new_todo3 = Todo(
   ['read while biking', 'do arm strengthning exercises while biking']
 );
 
+// storage.addTodo(new_todo);
+// storage.addTodo(new_todo2);
+// storage.addTodo(new_todo3);
+
 const container = document.querySelector('#content');
-container.appendChild(todoItem(new_todo2));
-container.appendChild(todoItem(new_todo));
-container.appendChild(todoItem(new_todo3));
+storage.todos.forEach((todo) => {
+  container.appendChild(todoComponent(todo));
+});
