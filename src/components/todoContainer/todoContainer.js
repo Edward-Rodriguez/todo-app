@@ -4,6 +4,7 @@ import DeleteIcon from './delete-icon.svg';
 import EditIcon from './edit-icon.svg';
 import Storage from '../../storage';
 import './todoContainer.css';
+import editDialog from '../editDialog/editDialog';
 
 export default function todoContainer(todo) {
   const todoDiv = document.createElement('div');
@@ -78,13 +79,19 @@ export default function todoContainer(todo) {
       return checklistContainer;
     }
 
+    function clickHandlerEdit() {
+      const editDialogBox = editDialog(todo);
+      document.documentElement.appendChild(editDialogBox);
+      editDialogBox.showModal();
+    }
+
+    editButton.addEventListener('click', clickHandlerEdit);
     return dropdownContainer;
   }
 
-  function clickHandlerDropdown(ev) {
-    const todoContainer = ev.target.closest('[data-todo-id]'); // parent container
-    const dropdown = todoContainer.querySelector('.dropdown');
-    const dropdownIcon = todoContainer.querySelector('.dropdown-img');
+  function clickHandlerDropdown() {
+    const dropdown = todoDiv.querySelector('.dropdown');
+    const dropdownIcon = todoDiv.querySelector('.dropdown-img');
 
     if (dropdown.classList.contains('hidden')) {
       dropdown.classList.remove('hidden');
@@ -101,9 +108,13 @@ export default function todoContainer(todo) {
     storage.removeTodo(todo.id);
   }
 
-  function clickHandlerEdit() {}
-
   dropdownButton.addEventListener('click', clickHandlerDropdown);
   deleteButton.addEventListener('click', clickHandlerDelete);
+  // todoDiv.addEventListener('click', (ev) => {
+  //   if (ev.target.classList.contains('todo-container')) {
+  //     clickHandlerDropdown();
+  //   }
+  // });
+
   return todoDiv;
 }

@@ -1,0 +1,56 @@
+dialog {
+  border: 1px solid #6c7ae0;
+  border-radius: 8px;
+  margin: 20vh auto;
+  padding: 16px;
+}
+
+.form {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 24px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-rows: min-content auto;
+}
+
+label[for='title'],
+label[for='notes'],
+label[for='dueDate'] {
+  /* visibility: hidden; */
+  font-weight: 600;
+}
+
+input[name='title'] {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+label[for='title'],
+label[for='notes'],
+label[for='dueDate'] {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: rgb(100, 100, 100);
+  letter-spacing: 0.025rem;
+}
+
+input::placeholder {
+  font-size: 0.8rem;
+  color: rgb(140, 140, 140);
+  letter-spacing: 0.025rem;
+  font-weight: 400;
+}
+
+input[name='title'],
+input[name='notes'] {
+  border: none;
+  outline: none;
+}
+
+input[type='date'] {
+  padding: 0px 2px;
+  max-width: min-content;
+}

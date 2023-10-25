@@ -14,6 +14,12 @@ html {
   padding: 0;
 }
 
+:root {
+  --priority-low-color: #379580;
+  --priority-medium-color: #cd9862;
+  --priority-high-color: #ba4949;
+}
+
 #content {
   display: grid;
   gap: 24px;

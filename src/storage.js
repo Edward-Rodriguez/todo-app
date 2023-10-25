@@ -1,8 +1,8 @@
 export default function Storage() {
   const todos_key = 'todos';
   const projects_key = 'projects';
-  let todos = JSON.parse(localStorage.getItem(todos_key));
-  let projects = JSON.parse(localStorage.getItem(projects_key));
+  let todos = JSON.parse(localStorage.getItem(todos_key)) || [];
+  let projects = JSON.parse(localStorage.getItem(projects_key)) || [];
 
   function addTodo(todo) {
     todos.push(todo);
