@@ -16,25 +16,17 @@ dialog {
   grid-template-rows: min-content auto;
 }
 
-label[for='title'],
-label[for='notes'],
-label[for='dueDate'] {
-  /* visibility: hidden; */
-  font-weight: 600;
-}
-
 input[name='title'] {
   font-size: 1rem;
   font-weight: 800;
 }
 
-label[for='title'],
-label[for='notes'],
-label[for='dueDate'] {
+dialog label {
   font-weight: 600;
   font-size: 0.8rem;
   color: rgb(100, 100, 100);
   letter-spacing: 0.025rem;
+  padding-bottom: 2px;
 }
 
 input::placeholder {
@@ -50,7 +42,8 @@ input[name='notes'] {
   outline: none;
 }
 
-input[type='date'] {
+input[type='date'],
+select {
   padding: 0px 2px;
   max-width: min-content;
 }

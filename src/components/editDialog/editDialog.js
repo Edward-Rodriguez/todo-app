@@ -7,7 +7,7 @@ export default function editDialog(todo) {
   const form = document.createElement('form');
   form.classList.add('form');
 
-  const titleComponent = formComponent('Task name', {
+  const titleComponent = formComponent('input', 'Task name', {
     type: 'text',
     name: 'title',
     id: 'title',
@@ -16,7 +16,7 @@ export default function editDialog(todo) {
     value: todo.title,
   });
 
-  const notesComponent = formComponent('Notes', {
+  const notesComponent = formComponent('input', 'Notes', {
     type: 'text',
     name: 'notes',
     id: 'notes',
@@ -24,23 +24,7 @@ export default function editDialog(todo) {
     value: todo.notes || '',
   });
 
-  //due Date
-  const dueDateFormRow = document.createElement('div');
-  const dateField = document.createElement('input');
-  const dateLabel = document.createElement('label');
-  setAttributes(dateField, {
-    type: 'date',
-    id: 'dueDate',
-    name: 'dueDate',
-    min: format(new Date(), 'yyyy-MM-dd'),
-  });
-  if (todo.dueDate) dateField.value = todo.dueDate;
-  dueDateFormRow.classList.add('form-row');
-  dateLabel.textContent = 'Due Date';
-  setAttributes(dateLabel, { for: 'dueDate' });
-  dueDateFormRow.append(dateLabel, dateField);
-
-  const dueDateComponent = formComponent('Due Date', {
+  const dueDateComponent = formComponent('input', 'Due Date', {
     type: 'date',
     id: 'dueDate',
     name: 'dueDate',
@@ -48,17 +32,40 @@ export default function editDialog(todo) {
     value: todo.dueDate || '',
   });
 
-  // prioriity
-  // const priorityFormRow = document.createElement();
+  const priorityComponent = formComponent(
+    'select',
+    'Priority',
+    {
+      name: 'priority',
+      id: 'priority',
+    },
+    ['low', 'medium', 'high']
+  );
 
-  function setAttributes(elem, attrs) {
-    Object.entries(attrs).forEach((entry) => {
-      const [key, value] = entry;
-      elem.setAttribute(key, value);
-    });
-  }
+  const projectComponent = formComponent(
+    'select',
+    'Project',
+    {
+      name: 'project',
+      id: 'project',
+    },
+    ['All', 'Daily', 'Upcoming', 'Test'] //change to projects array when implemented and imported
+  );
 
-  form.append(titleComponent, notesComponent, dueDateComponent);
+  // const checklistComponent = formComponent('input', 'Checklist', {
+  //   type: 'checkbox',
+  //   id: 'checklist',
+  //   name: 'checklist',
+  //   value: todo.checklist || '',
+  // });
+
+  form.append(
+    titleComponent,
+    notesComponent,
+    dueDateComponent,
+    priorityComponent,
+    projectComponent
+  );
   editDialogBox.append(form);
   return editDialogBox;
 }

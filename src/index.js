@@ -31,9 +31,9 @@ const new_todo3 = Todo(
   ['read while biking', 'do arm strengthning exercises while biking']
 );
 
-storage.addTodo(new_todo);
-storage.addTodo(new_todo2);
-storage.addTodo(new_todo3);
+// storage.addTodo(new_todo);
+// storage.addTodo(new_todo2);
+// storage.addTodo(new_todo3);
 
 const container = document.querySelector('#content');
 storage.todos.forEach((todo) => {
