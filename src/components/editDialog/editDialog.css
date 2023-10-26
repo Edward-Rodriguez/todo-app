@@ -47,3 +47,14 @@ select {
   padding: 0px 2px;
   max-width: min-content;
 }
+
+.selection-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 48px;
+}
+
+select {
+  padding: 1px;
+}
