@@ -21,7 +21,8 @@ input[name='title'] {
   font-weight: 800;
 }
 
-dialog label {
+dialog label,
+legend {
   font-weight: 600;
   font-size: 0.8rem;
   color: rgb(100, 100, 100);

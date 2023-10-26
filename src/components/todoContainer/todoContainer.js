@@ -70,6 +70,7 @@ export default function todoContainer(todo) {
         itemContainer.classList.add('checklist-item');
         itemContainer.setAttribute('id', index);
         checkbox.setAttribute('type', 'checkbox');
+        // checkbox.style.borderColor = `var(--priority-${todo.priority}-color)`;
         span.textContent = item;
         label.prepend(checkbox);
         label.append(span);
@@ -110,11 +111,6 @@ export default function todoContainer(todo) {
 
   dropdownButton.addEventListener('click', clickHandlerDropdown);
   deleteButton.addEventListener('click', clickHandlerDelete);
-  // todoDiv.addEventListener('click', (ev) => {
-  //   if (ev.target.classList.contains('todo-container')) {
-  //     clickHandlerDropdown();
-  //   }
-  // });
 
   return todoDiv;
 }

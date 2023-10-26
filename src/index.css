@@ -16,6 +16,7 @@ html {
 
 :root {
   --priority-low-color: #379580;
+  --priority-low-color: #818181;
   --priority-medium-color: #cd9862;
   --priority-high-color: #ba4949;
 }

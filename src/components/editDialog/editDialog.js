@@ -1,6 +1,7 @@
 import './editDialog.css';
 import format from 'date-fns/format';
-import formComponent from './input';
+import formComponent from './formControl';
+import checklistComponent from './checklist';
 
 export default function editDialog(todo) {
   const editDialogBox = document.createElement('dialog');
@@ -62,14 +63,9 @@ export default function editDialog(todo) {
     projectComponent
   );
 
-  const checklistComponent = formComponent('input', 'Checklist', {
-    type: 'checkbox',
-    id: 'checklist',
-    name: 'checklist',
-    value: todo.checklist || '',
-  });
+  const checklist = checklistComponent(todo.checklist);
 
-  form.append(titleComponent, notesComponent, selectionFormRow);
+  form.append(titleComponent, notesComponent, selectionFormRow, checklist);
   editDialogBox.append(form);
   return editDialogBox;
 }

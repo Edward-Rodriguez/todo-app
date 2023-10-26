@@ -1,0 +1,46 @@
+fieldset {
+  border: none;
+  display: grid;
+  grid-auto-flow: row;
+  gap: 4px;
+}
+
+fieldset .form-control {
+  display: grid;
+  grid-template-columns: 24px 0px auto;
+  align-items: center;
+}
+
+fieldset textarea {
+  height: 28px;
+  width: auto;
+  padding: 4px;
+  font-size: 1rem;
+  border: 1px solid rgb(153, 153, 153);
+  border-radius: 4px;
+  background-color: rgb(247, 247, 247);
+  resize: none;
+  overflow: hidden;
+}
+
+fieldset textarea:active,
+fieldset textarea:focus {
+  outline: none;
+  border: 2px solid rgb(125, 125, 125);
+}
+
+button img {
+  height: 100%;
+  width: auto;
+}
+
+fieldset button {
+  height: 24px;
+  border: none;
+  background-color: inherit;
+}
+
+fieldset button:hover {
+  cursor: pointer;
+  scale: 1.2;
+}
