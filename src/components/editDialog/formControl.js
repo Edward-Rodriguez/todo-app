@@ -33,5 +33,5 @@ export default function formComponent(element, heading, attributes, options) {
     }
   }
 
-  return formRow;
+  return { formRow, inputField };
 }

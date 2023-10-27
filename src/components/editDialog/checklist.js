@@ -1,9 +1,7 @@
 import './checklist.css';
-import formComponent from './formControl';
 import AddIcon from './add_icon_green.svg';
 import CloseIcon from './close_icon.svg';
 import CloseIconRed from './close_icon_red.svg';
-import Storage from '../../storage';
 
 export default function checklistComponent(todo) {
   const fieldset = document.createElement('fieldset');
@@ -24,20 +22,6 @@ export default function checklistComponent(todo) {
   });
   fieldset.append(addButton);
   addButton.addEventListener('click', (ev) => clickHandlerAdd(ev));
-
-  const buttonContainer = document.createElement('div');
-  const cancelButton = document.createElement('button');
-  const saveButton = document.createElement('button');
-  buttonContainer.classList.add('submit-btns');
-  cancelButton.setAttribute('id', 'cancel-btn');
-  cancelButton.setAttribute('formmethod', 'dialog');
-  cancelButton.textContent = 'Cancel';
-  cancelButton.value = 'cancel';
-  saveButton.setAttribute('id', 'save-btn');
-  saveButton.setAttribute('type', 'submit');
-  saveButton.textContent = 'Save';
-  buttonContainer.append(cancelButton, saveButton);
-  fieldset.appendChild(buttonContainer);
 
   function checklistItemContainer(checklistItem = null) {
     const itemContainer = document.createElement('div');

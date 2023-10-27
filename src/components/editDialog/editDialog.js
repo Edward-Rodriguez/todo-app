@@ -2,6 +2,7 @@ import './editDialog.css';
 import format from 'date-fns/format';
 import formComponent from './formControl';
 import checklistComponent from './checklist';
+import Storage from '../../storage';
 
 export default function editDialog(todo) {
   const editDialogBox = document.createElement('dialog');
@@ -16,7 +17,7 @@ export default function editDialog(todo) {
     placeholder: 'Add a task name',
     value: todo.title,
   });
-  titleComponent.classList.add('form-row');
+  titleComponent.formRow.classList.add('form-row');
 
   const notesComponent = formComponent('input', 'Notes', {
     type: 'text',
@@ -25,7 +26,7 @@ export default function editDialog(todo) {
     placeholder: 'Add additional notes',
     value: todo.notes || '',
   });
-  notesComponent.classList.add('form-row');
+  notesComponent.formRow.classList.add('form-row');
 
   const dueDateComponent = formComponent('input', 'Due Date', {
     type: 'date',
@@ -58,14 +59,56 @@ export default function editDialog(todo) {
   const selectionFormRow = document.createElement('div');
   selectionFormRow.classList.add('form-row', 'selection-container');
   selectionFormRow.append(
-    dueDateComponent,
-    priorityComponent,
-    projectComponent
+    dueDateComponent.formRow,
+    priorityComponent.formRow,
+    projectComponent.formRow
   );
 
-  const checklist = checklistComponent(todo);
+  const checklistDiv = checklistComponent(todo);
+  const buttonFormRow = document.createElement('div');
+  const cancelButton = document.createElement('button');
+  const saveButton = document.createElement('button');
+  buttonFormRow.classList.add('submit-btns', 'form-row');
+  cancelButton.setAttribute('id', 'cancel-btn');
+  cancelButton.setAttribute('formmethod', 'dialog');
+  cancelButton.textContent = 'Cancel';
+  cancelButton.value = 'cancel';
+  saveButton.setAttribute('id', 'save-btn');
+  saveButton.setAttribute('type', 'submit');
+  saveButton.textContent = 'Save';
+  buttonFormRow.append(cancelButton, saveButton);
+  saveButton.addEventListener('click', onSubmit);
+  cancelButton.addEventListener('click', clickHandlerCancel);
 
-  form.append(titleComponent, notesComponent, selectionFormRow, checklist);
+  function onSubmit(ev) {
+    ev.preventDefault();
+    todo.title = titleComponent.inputField.value;
+    todo.notes = notesComponent.inputField.value;
+    todo.dueDate = dueDateComponent.inputField.value;
+    todo.priority = priorityComponent.inputField.value;
+    todo.project = projectComponent.inputField.value;
+    let checklist = [];
+    Array.from(checklistDiv.children).forEach((child) => {
+      const textarea = child.querySelector("textarea[name='checklist'");
+      textarea ? checklist.push(textarea.value) : '';
+    });
+    todo.checklist = checklist;
+    Storage().updateTodo(todo.id, todo);
+    console.log({ title, notes, dueDate, priority, project, checklist });
+  }
+
+  function clickHandlerCancel(ev) {
+    ev.preventDefault();
+    editDialogBox.close();
+  }
+
+  form.append(
+    titleComponent.formRow,
+    notesComponent.formRow,
+    selectionFormRow,
+    checklistDiv,
+    buttonFormRow
+  );
   editDialogBox.append(form);
   return editDialogBox;
 }
