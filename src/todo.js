@@ -51,6 +51,9 @@ export default function Todo(
     get checklist() {
       return checklist;
     },
+    set checklist(newChecklist) {
+      checklist = newChecklist;
+    },
     addChecklistItem,
   };
 }

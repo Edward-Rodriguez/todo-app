@@ -19,7 +19,8 @@ const new_todo2 = Todo(
   [
     'read while biking',
     'increase intensity by 1',
-    'do arm strengthning exercises while biking',
+    'do arm strengthening exercises while biking',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
   ]
 );
 const new_todo3 = Todo(
@@ -28,7 +29,7 @@ const new_todo3 = Todo(
   'medium',
   'Daily',
   'Interval training on exercise bike',
-  ['read while biking', 'do arm strengthning exercises while biking']
+  ['read while biking', 'do arm strengthening exercises while biking']
 );
 
 // storage.addTodo(new_todo);

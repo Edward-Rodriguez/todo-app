@@ -63,7 +63,7 @@ export default function editDialog(todo) {
     projectComponent
   );
 
-  const checklist = checklistComponent(todo.checklist);
+  const checklist = checklistComponent(todo);
 
   form.append(titleComponent, notesComponent, selectionFormRow, checklist);
   editDialogBox.append(form);

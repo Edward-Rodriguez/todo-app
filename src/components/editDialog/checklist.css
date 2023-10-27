@@ -8,19 +8,18 @@ fieldset {
 fieldset .form-control {
   display: grid;
   grid-template-columns: 24px 0px auto;
+  grid-template-rows: min-content;
   align-items: center;
 }
 
 fieldset textarea {
-  height: 28px;
-  width: auto;
+  height: 32px;
   padding: 4px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   border: 1px solid rgb(153, 153, 153);
   border-radius: 4px;
   background-color: rgb(247, 247, 247);
   resize: none;
-  overflow: hidden;
 }
 
 fieldset textarea:active,
@@ -34,13 +33,84 @@ button img {
   width: auto;
 }
 
-fieldset button {
+.delete-btn {
   height: 24px;
   border: none;
   background-color: inherit;
+  transition: all 100ms ease-out;
 }
 
-fieldset button:hover {
+.delete-btn:hover {
+  cursor: pointer;
+  scale: 1.1;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+#add-btn {
+  border: none;
+  background-color: inherit;
+  justify-self: flex-start;
+  display: flex;
+  padding-left: 20px;
+  align-items: center;
+  font-size: 0.9rem;
+  transition: all 100ms ease-out;
+}
+
+#add-btn:hover {
   cursor: pointer;
   scale: 1.2;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.submit-btns {
+  justify-self: end;
+  display: flex;
+  gap: 4px;
+}
+
+#cancel-btn,
+#save-btn {
+  width: 80px;
+  height: auto;
+  padding: 8px 16px;
+  border: 1px solid;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.5s ease-out;
+}
+
+#save-btn {
+  background-color: #377b95;
+  color: #fff;
+}
+
+#cancel-btn {
+  background-color: #fff;
+  color: #377b95;
+}
+
+#save-btn:hover,
+#save-btn:focus {
+  background-color: #fff;
+  color: #377b95;
+}
+
+#save-btn:active {
+  background-color: #377b95;
+  color: #fff;
+}
+
+#cancel-btn:hover,
+#cancel-btn:focus {
+  background-color: #ebf2f4;
+  color: #2c6277;
+}
+
+.submit-btns button {
+  cursor: pointer;
 }
