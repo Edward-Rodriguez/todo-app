@@ -1,0 +1,15 @@
+#header {
+  background-color: #379580;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 8px 50px;
+}
+
+#header img {
+  height: 100%;
+  width: auto;
+  padding-right: 8px;
+}
