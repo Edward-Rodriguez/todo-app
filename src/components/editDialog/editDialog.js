@@ -46,6 +46,10 @@ export default function editDialog(todo) {
     ['Low', 'Medium', 'High']
   );
 
+  const projectList = [];
+  Storage().projects.forEach((project) => {
+    projectList.push(project.title);
+  });
   const projectComponent = formComponent(
     'select',
     'Project',
@@ -53,7 +57,7 @@ export default function editDialog(todo) {
       name: 'project',
       id: 'project',
     },
-    ['All', 'Daily', 'Upcoming', 'Test'] //change to projects array when implemented and imported
+    projectList
   );
 
   const selectionFormRow = document.createElement('div');
@@ -81,7 +85,6 @@ export default function editDialog(todo) {
   cancelButton.addEventListener('click', clickHandlerCancel);
 
   function onSubmit(ev) {
-    ev.preventDefault();
     todo.title = titleComponent.inputField.value;
     todo.notes = notesComponent.inputField.value;
     todo.dueDate = dueDateComponent.inputField.value;

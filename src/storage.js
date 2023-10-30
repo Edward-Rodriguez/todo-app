@@ -2,9 +2,9 @@ export default function Storage() {
   const todos_key = 'todos';
   const projects_key = 'projects';
   let todos = JSON.parse(localStorage.getItem(todos_key)) || [];
-  console.log('type of todos = ', typeof todos);
   if (typeof todos !== 'object') todos = [];
   let projects = JSON.parse(localStorage.getItem(projects_key)) || [];
+  console.log(projects);
   if (typeof projects !== 'object') projects = [];
 
   function addTodo(todo) {
@@ -15,7 +15,7 @@ export default function Storage() {
   function removeTodo(todoId) {
     localStorage.setItem(
       todos_key,
-      JSON.stringify(todos.filter((todo) => todo.id !== todoId))
+      JSON.stringify(todos.filter((todo) => todo.id === todoId))
     );
   }
 
@@ -34,7 +34,7 @@ export default function Storage() {
   function removeProject(projectId) {
     localStorage.setItem(
       projects_key,
-      JSON.stringify(projects.filter((project) => project.id !== projectId))
+      JSON.stringify(projects.filter((project) => project.id === projectId))
     );
   }
 

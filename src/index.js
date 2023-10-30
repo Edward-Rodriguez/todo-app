@@ -32,6 +32,14 @@ const new_todo3 = Todo(
   ['read while biking', 'do arm strengthening exercises while biking']
 );
 
+const project = Project('Daily', [new_todo2, new_todo3]);
+const project2 = Project('TestProject', [new_todo, new_todo2]);
+
+// storage.removeProject(1);
+// storage.removeProject(2);
+// storage.addProject(project);
+// storage.addProject(project2);
+
 // storage.addTodo(new_todo);
 // storage.addTodo(new_todo2);
 // storage.addTodo(new_todo3);
