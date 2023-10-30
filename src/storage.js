@@ -7,15 +7,17 @@ export default function Storage() {
   console.log(projects);
   if (typeof projects !== 'object') projects = [];
 
-  function addTodo(todo) {
-    todos.push(todo);
+  function addTodo(newTodo) {
+    const dupTitleCount = duplicateTitleCount(todos, newTodo.title);
+    if (dupTitleCount > 0) newTodo.title += `(${dupTitleCount})`;
+    todos.push(newTodo);
     localStorage.setItem(todos_key, JSON.stringify(todos));
   }
 
   function removeTodo(todoId) {
     localStorage.setItem(
       todos_key,
-      JSON.stringify(todos.filter((todo) => todo.id === todoId))
+      JSON.stringify(todos.filter((todo) => todo.id !== todoId))
     );
   }
 
@@ -26,16 +28,26 @@ export default function Storage() {
     localStorage.setItem(todos_key, JSON.stringify(todos));
   }
 
-  function addProject(project) {
-    projects.push(project);
+  function addProject(newProject) {
+    const dupTitleCount = duplicateTitleCount(projects, newProject.title);
+    if (dupTitleCount > 0) newProject.title += `(${dupTitleCount})`;
+    projects.push(newProject);
     localStorage.setItem(projects_key, JSON.stringify(projects));
   }
 
   function removeProject(projectId) {
     localStorage.setItem(
       projects_key,
-      JSON.stringify(projects.filter((project) => project.id === projectId))
+      JSON.stringify(projects.filter((project) => project.id !== projectId))
     );
+  }
+
+  function duplicateTitleCount(arr, title) {
+    const regex = new RegExp('^' + title + '[(/d)]?');
+    let duplicateCount = arr.filter(
+      (obj) => obj.title === title || regex.test(obj.title)
+    ).length;
+    return duplicateCount;
   }
 
   return {
