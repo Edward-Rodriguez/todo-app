@@ -1,4 +1,39 @@
 #sidebar-menu {
   background-color: #fafafa;
   padding: 40px 20px;
+  height: 100%;
+}
+
+#projects-container {
+  padding-top: 24px;
+}
+
+#projects-container header h1 {
+  font-size: 1rem;
+  padding-left: 20px;
+}
+
+#projects-container .menu-item {
+  height: 48px;
+  width: auto;
+}
+
+#projects-container .menu-item:hover img {
+  display: inline;
+}
+
+.menu-item .project-delete-icon {
+  display: none;
+}
+
+.menu-item:hover .project-delete-icon {
+  display: inline;
+}
+
+#projects-container .menu-item:hover .menu-icon {
+  display: none;
+}
+
+.project-delete-icon:hover {
+  scale: 1.2;
 }
