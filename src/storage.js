@@ -2,14 +2,14 @@ export default function Storage() {
   const todos_key = 'todos';
   const projects_key = 'projects';
   let todos = JSON.parse(localStorage.getItem(todos_key)) || [];
-  if (typeof todos !== 'object') todos = [];
   let projects = JSON.parse(localStorage.getItem(projects_key)) || [];
-  console.log(projects);
-  if (typeof projects !== 'object') projects = [];
+  let maxTodoId = getMaxId(todos);
+  let maxProjectId = getMaxId(projects);
 
   function addTodo(newTodo) {
     const dupTitleCount = duplicateTitleCount(todos, newTodo.title);
     if (dupTitleCount > 0) newTodo.title += `(${dupTitleCount})`;
+    maxTodoId++;
     todos.push(newTodo);
     localStorage.setItem(todos_key, JSON.stringify(todos));
   }
@@ -31,6 +31,7 @@ export default function Storage() {
   function addProject(newProject) {
     const dupTitleCount = duplicateTitleCount(projects, newProject.title);
     if (dupTitleCount > 0) newProject.title += `(${dupTitleCount})`;
+    maxProjectId++;
     projects.push(newProject);
     localStorage.setItem(projects_key, JSON.stringify(projects));
   }
@@ -50,12 +51,40 @@ export default function Storage() {
     return duplicateCount;
   }
 
+  function getMaxId(obj) {
+    let maxId = 0;
+    if (obj.length !== 0)
+      obj.forEach((entry) => {
+        if (entry.id > maxId) maxId = entry.id;
+      });
+    return maxId;
+  }
+
   return {
     addTodo,
     removeTodo,
     updateTodo,
     addProject,
     removeProject,
+    get maxTodoId() {
+      return maxTodoId;
+      //
+    },
+    set maxTodoId(newId) {
+      maxTodoId = newId;
+      //
+    },
+    set maxProjectId(newProjectId) {
+      maxProjectId = newProjectId;
+      //
+    },
+    set maxTodoId(newId) {
+      maxTodoId = newId;
+      //
+    },
+    get maxProjectId() {
+      return maxProjectId;
+    },
     get todos() {
       return todos;
     },

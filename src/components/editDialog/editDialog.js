@@ -97,7 +97,7 @@ export default function editDialog(todo) {
       textarea ? checklist.push(textarea.value) : '';
     });
     todo.checklist = checklist;
-    storage.todos.find((todo) => todo.id)
+    storage.todos.find((existingTodo) => existingTodo.id === todo.id)
       ? storage.updateTodo(todo.id, todo)
       : storage.addTodo(todo);
   }

@@ -1,15 +1,12 @@
-let todoId = 0;
-
 export default function Todo(
-  title,
-  dueDate,
-  priority,
+  id,
+  title = '',
+  dueDate = null,
+  priority = null,
   project = 'Home',
-  notes,
+  notes = null,
   checklist = []
 ) {
-  const id = ++todoId;
-
   function addChecklistItem(newChecklistItem) {
     checklist.push(newChecklistItem);
   }
