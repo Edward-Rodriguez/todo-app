@@ -89,7 +89,7 @@ export default function editDialog(todo) {
     todo.title = titleComponent.inputField.value;
     todo.notes = notesComponent.inputField.value;
     todo.dueDate = dueDateComponent.inputField.value;
-    todo.priority = priorityComponent.inputField.value;
+    todo.priority = priorityComponent.inputField.value.toLowerCase();
     todo.project = projectComponent.inputField.value;
     let checklist = [];
     Array.from(checklistDiv.children).forEach((child) => {

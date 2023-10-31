@@ -1,5 +1,6 @@
 import './checklist.css';
 import AddIcon from '../../assets/img/add_icon_green.svg';
+import AddFillIcon from '../../assets/img/add_icon_green_filled.svg';
 import CloseIcon from '../../assets/img/close_icon.svg';
 import CloseIconRed from '../../assets/img/close_icon_red.svg';
 
@@ -8,12 +9,19 @@ export default function checklistComponent(todo) {
   const legend = document.createElement('legend');
   const addButton = document.createElement('button');
   const addIcon = document.createElement('img');
+  const addFilledIcon = document.createElement('img');
+  const buttonText = document.createElement('p');
   let checklistItemId = 0;
 
   addIcon.src = AddIcon;
-  addButton.textContent = 'Add item';
+  addIcon.setAttribute('id', 'checklist-add-icon');
+  addFilledIcon.src = AddFillIcon;
+  addFilledIcon.setAttribute('id', 'checklist-add-fill-icon');
+  buttonText.textContent = 'Add item';
   addButton.setAttribute('id', 'add-btn');
   addButton.prepend(addIcon);
+  addButton.prepend(addFilledIcon);
+  addButton.append(buttonText);
   legend.textContent = 'Checklist';
   fieldset.appendChild(legend);
 

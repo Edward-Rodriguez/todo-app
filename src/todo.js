@@ -2,7 +2,7 @@ export default function Todo(
   id,
   title = '',
   dueDate = null,
-  priority = null,
+  priority = '',
   project = 'Home',
   notes = null,
   checklist = []

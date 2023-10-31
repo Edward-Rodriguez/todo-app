@@ -55,12 +55,29 @@ button img {
   padding-left: 20px;
   align-items: center;
   font-size: 0.9rem;
-  transition: all 100ms ease-out;
+}
+
+#add-btn img {
+  height: 24px;
+  width: auto;
 }
 
 #add-btn:hover {
   cursor: pointer;
-  scale: 1.2;
-  backface-visibility: hidden;
-  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+#checklist-add-fill-icon {
+  display: none;
+}
+
+#add-btn:hover #checklist-add-fill-icon {
+  display: inline;
+}
+
+#add-btn:hover #checklist-add-icon {
+  display: none;
+}
+
+#add-btn p {
+  padding-top: 3px;
 }

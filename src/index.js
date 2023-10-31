@@ -15,6 +15,7 @@ const displayController = (() => {
   const pageContainer = document.querySelector('body');
   const addTaskButton = document.createElement('button');
   const addTaskIcon = document.createElement('img');
+  const addTaskFilledIcon = document.createElement('img');
   const main = document.createElement('main');
   const todos = storage.todos;
 
@@ -77,23 +78,21 @@ const displayController = (() => {
   todos.forEach((todo) => {
     main.appendChild(todoComponent(todo));
   });
-  //
+
   pageContainer.setAttribute('id', 'page-container');
   main.setAttribute('id', 'content');
 
   addTaskIcon.src = AddIcon;
+  addTaskIcon.setAttribute('id', 'add-task-icon');
+  addTaskFilledIcon.setAttribute('id', 'add-task-filled-icon');
+  addTaskFilledIcon.src = AddFilledIcon;
   addTaskButton.textContent = 'Add Task';
   addTaskButton.setAttribute('id', 'add-task-btn');
   addTaskButton.prepend(addTaskIcon);
+  addTaskButton.prepend(addTaskFilledIcon);
   main.appendChild(addTaskButton);
 
-  addTaskButton.addEventListener('mouseover', toggleAddButtonIcon);
-  addTaskButton.addEventListener('mouseleave', toggleAddButtonIcon);
   addTaskButton.addEventListener('click', clickHandlerAddTaskButton);
-
-  function toggleAddButtonIcon() {
-    addTaskIcon.src = addTaskIcon.src === AddIcon ? AddFilledIcon : AddIcon;
-  }
 
   function clickHandlerAddTaskButton() {
     const newTodo = Todo(++storage.maxTodoId);
