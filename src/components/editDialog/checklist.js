@@ -1,7 +1,7 @@
 import './checklist.css';
-import AddIcon from './add_icon_green.svg';
-import CloseIcon from './close_icon.svg';
-import CloseIconRed from './close_icon_red.svg';
+import AddIcon from '../../assets/img/add_icon_green.svg';
+import CloseIcon from '../../assets/img/close_icon.svg';
+import CloseIconRed from '../../assets/img/close_icon_red.svg';
 
 export default function checklistComponent(todo) {
   const fieldset = document.createElement('fieldset');

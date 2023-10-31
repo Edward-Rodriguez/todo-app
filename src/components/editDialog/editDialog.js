@@ -5,6 +5,7 @@ import checklistComponent from './checklist';
 import Storage from '../../storage';
 
 export default function editDialog(todo) {
+  const storage = Storage();
   const editDialogBox = document.createElement('dialog');
   const form = document.createElement('form');
   form.classList.add('form');
@@ -96,8 +97,9 @@ export default function editDialog(todo) {
       textarea ? checklist.push(textarea.value) : '';
     });
     todo.checklist = checklist;
-    Storage().updateTodo(todo.id, todo);
-    console.log({ title, notes, dueDate, priority, project, checklist });
+    storage.todos.find((todo) => todo.id)
+      ? storage.updateTodo(todo.id, todo)
+      : storage.addTodo(todo);
   }
 
   function clickHandlerCancel(ev) {

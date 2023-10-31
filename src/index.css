@@ -21,8 +21,46 @@ html {
   --priority-high-color: #ba4949;
 }
 
+#page-container {
+  display: grid;
+  grid-template: 40px auto / minmax(200px, 300px) auto;
+  grid-template-areas:
+    'header header'
+    'sidebar main';
+}
+
+#header {
+  grid-area: header;
+}
+
+#sidebar-menu {
+  grid-area: sidebar;
+}
+
 #content {
+  grid-area: main;
   display: grid;
   gap: 24px;
-  padding: 24px;
+  padding: 48px;
+}
+
+#add-task-btn {
+  height: min-content;
+  border: none;
+  background-color: inherit;
+  justify-self: flex-start;
+  display: flex;
+  padding-left: 10px;
+  align-items: center;
+  font-size: 1.1rem;
+  gap: 4px;
+}
+
+#add-task-btn:hover {
+  cursor: pointer;
+}
+
+#add-task-btn img {
+  height: 24px;
+  width: auto;
 }
