@@ -86,9 +86,14 @@ export default function Storage() {
       return maxProjectId;
     },
     get todos() {
+      todos = JSON.parse(localStorage.getItem(todos_key)) || [];
       return todos;
     },
+    set todos(newTodos) {
+      localStorage.setItem(todos_key, JSON.stringify(newTodos));
+    },
     get projects() {
+      projects = JSON.parse(localStorage.getItem(projects_key)) || [];
       return projects;
     },
   };

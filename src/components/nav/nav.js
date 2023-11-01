@@ -75,9 +75,17 @@ export const nav = () => {
 
   function clickHandlerDelete(ev) {
     const menuItemToRemove = ev.target.closest('.menu-item');
+    const projectIdToRemove = menuItemToRemove.dataset.projectId;
+    const projectToRemove = storage.projects.find(
+      (proj) => proj.id === +projectIdToRemove
+    );
     projectsContainer.removeChild(menuItemToRemove);
-    console.log('remove = ', menuItemToRemove.dataset.projectId);
-    storage.removeProject(menuItemToRemove.dataset.projectId);
+    storage.removeProject(projectIdToRemove);
+
+    // remove all associated todo's
+    storage.todos = storage.todos.filter(
+      (todo) => todo.project !== projectToRemove.title
+    );
   }
 
   nav.appendChild(projectsContainer);

@@ -8,7 +8,7 @@ import { header } from './components/header/header';
 import editDialog from './components/editDialog/editDialog';
 import AddIcon from './assets/img/add_icon_green.svg';
 import AddFilledIcon from './assets/img/add_icon_green_filled.svg';
-import './index.css';
+import './assets/css/index.css';
 
 const displayController = (() => {
   const storage = Storage();
@@ -73,8 +73,8 @@ const displayController = (() => {
   // storage.removeProject(3);
   // storage.removeTodo(1);
   // storage.addProject(project);
-  storage.addProject(project3);
-  storage.addProject(project4);
+  // storage.addProject(project3);
+  // storage.addProject(project4); ///
 
   todos.forEach((todo) => {
     main.appendChild(todoComponent(todo));
