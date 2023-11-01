@@ -9,6 +9,7 @@ export default function editDialog(todo) {
   const editDialogBox = document.createElement('dialog');
   const form = document.createElement('form');
   form.classList.add('form');
+  form.setAttribute('method', 'dialog');
 
   const titleComponent = formComponent('input', 'Task name', {
     type: 'text',
@@ -85,7 +86,7 @@ export default function editDialog(todo) {
   saveButton.addEventListener('click', onSubmit);
   cancelButton.addEventListener('click', clickHandlerCancel);
 
-  function onSubmit(ev) {
+  function onSubmit() {
     todo.title = titleComponent.inputField.value;
     todo.notes = notesComponent.inputField.value;
     todo.dueDate = dueDateComponent.inputField.value;

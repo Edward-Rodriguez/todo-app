@@ -7,7 +7,7 @@ import './todoContainer.css';
 import editDialog from '../editDialog/editDialog';
 
 export default function todoContainer(todo) {
-  const todoDiv = document.createElement('div');
+  let todoDiv = document.createElement('div');
   const checkBox = document.createElement('input');
   const titleLabel = document.createElement('label');
   const titleSpan = document.createElement('span');
@@ -84,6 +84,18 @@ export default function todoContainer(todo) {
       const editDialogBox = editDialog(todo);
       document.documentElement.appendChild(editDialogBox);
       editDialogBox.showModal();
+      editDialogBox.addEventListener('close', () => {
+        reloadTodo();
+      });
+    }
+
+    function reloadTodo() {
+      todoDiv.textContent = '';
+      const updatedTodo = Storage().todos.find(
+        (updatedTodo) => updatedTodo.id === todo.id
+      );
+      console.log(updatedTodo);
+      todoDiv.parentElement.replaceChild(todoContainer(updatedTodo), todoDiv);
     }
 
     editButton.addEventListener('click', clickHandlerEdit);

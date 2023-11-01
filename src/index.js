@@ -107,7 +107,7 @@ const displayController = (() => {
   function updateTodoListDisplay(todoList) {
     main.textContent = '';
     todoList.forEach((todo) => {
-      main.prepend(todoComponent(todo));
+      main.appendChild(todoComponent(todo));
     });
     main.appendChild(addTaskButton);
   }
