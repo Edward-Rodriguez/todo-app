@@ -67,13 +67,14 @@ const displayController = (() => {
 
   const project = Project('Daily', [new_todo2, new_todo3]);
   const project2 = Project('TestProject', [new_todo, new_todo2]);
-  const project3 = Project('Daily', [new_todo, new_todo2]);
+  const project3 = Project('Test3Proj', [new_todo, new_todo2]);
   const project4 = Project('Daily', [new_todo, new_todo2]);
 
   // storage.removeProject(3);
   // storage.removeTodo(1);
   // storage.addProject(project);
-  // storage.addProject(project2);
+  storage.addProject(project3);
+  storage.addProject(project4);
 
   todos.forEach((todo) => {
     main.appendChild(todoComponent(todo));

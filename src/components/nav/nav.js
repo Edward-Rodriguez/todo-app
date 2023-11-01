@@ -42,6 +42,7 @@ export const nav = () => {
   heading.textContent = 'Projects';
   projectsHeader.appendChild(heading);
   projectsContainer.append(projectsHeader);
+
   storage.projects.forEach((project) => {
     const projectMenuLink = menuLink(
       project.title,
@@ -49,15 +50,34 @@ export const nav = () => {
       randomFillPicker()
     );
     const deleteIcon = document.createElement('img');
-    deleteIcon.src = CloseIconRed;
+
     deleteIcon.classList.add('project-delete-icon');
+    deleteIcon.src = CloseIconRed;
+    projectMenuLink.dataset.projectId = project.id;
     projectMenuLink.prepend(deleteIcon);
     projectsContainer.appendChild(projectMenuLink);
+    deleteIcon.addEventListener('click', (ev) => clickHandlerDelete(ev));
   });
 
   function randomFillPicker() {
-    const randomIndex = Math.floor(Math.random() * fillIcons.length);
-    return fillIcons[randomIndex];
+    const previousFill = nav.querySelector(
+      '.menu-item:last-child .menu-icon'
+    ).src;
+    const newFill = fillIcons[randomIndex(fillIcons)];
+    while (newFill === previousFill) {
+      newFill = fillIcons[randomIndex(fillIcons)];
+    }
+    function randomIndex(arr) {
+      return Math.floor(Math.random() * arr.length);
+    }
+    return newFill;
+  }
+
+  function clickHandlerDelete(ev) {
+    const menuItemToRemove = ev.target.closest('.menu-item');
+    projectsContainer.removeChild(menuItemToRemove);
+    console.log('remove = ', menuItemToRemove.dataset.projectId);
+    storage.removeProject(menuItemToRemove.dataset.projectId);
   }
 
   nav.appendChild(projectsContainer);

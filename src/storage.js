@@ -17,7 +17,7 @@ export default function Storage() {
   function removeTodo(todoId) {
     localStorage.setItem(
       todos_key,
-      JSON.stringify(todos.filter((todo) => todo.id !== todoId))
+      JSON.stringify(todos.filter((todo) => todo.id !== +todoId))
     );
   }
 
@@ -39,7 +39,7 @@ export default function Storage() {
   function removeProject(projectId) {
     localStorage.setItem(
       projects_key,
-      JSON.stringify(projects.filter((project) => project.id !== projectId))
+      JSON.stringify(projects.filter((project) => project.id !== +projectId))
     );
   }
 
