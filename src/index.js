@@ -17,7 +17,6 @@ const displayController = (() => {
   const addTaskIcon = document.createElement('img');
   const addTaskFilledIcon = document.createElement('img');
   const main = document.createElement('main');
-  const todos = storage.todos;
 
   // delete after completing
   const new_todo = Todo(
@@ -68,21 +67,17 @@ const displayController = (() => {
   const project = Project('Daily', [new_todo2, new_todo3]);
   const project2 = Project('TestProject', [new_todo, new_todo2]);
   const project3 = Project('Test3Proj', [new_todo, new_todo2]);
-  const project4 = Project('Daily', [new_todo, new_todo2]);
+  const project4 = Project('Project5', [new_todo, new_todo2]);
 
   // storage.removeProject(3);
   // storage.removeTodo(1);
   // storage.addProject(project);
   // storage.addProject(project3);
   // storage.addProject(project4); ///
-
-  todos.forEach((todo) => {
-    main.appendChild(todoComponent(todo));
-  });
+  updateTodoListDisplay(storage.todos);
 
   pageContainer.setAttribute('id', 'page-container');
   main.setAttribute('id', 'content');
-
   addTaskIcon.src = AddIcon;
   addTaskIcon.setAttribute('id', 'add-task-icon');
   addTaskFilledIcon.setAttribute('id', 'add-task-filled-icon');
@@ -94,6 +89,14 @@ const displayController = (() => {
   main.appendChild(addTaskButton);
 
   addTaskButton.addEventListener('click', clickHandlerAddTaskButton);
+  const navComponent = nav();
+  const navProjectList = navComponent.querySelectorAll('[data-project-id]');
+
+  Array.from(navProjectList).forEach((navProjectItem) => {
+    navProjectItem.addEventListener('click', (ev) =>
+      clickHandlerNavProject(ev)
+    );
+  });
 
   function clickHandlerAddTaskButton() {
     const newTodo = Todo(++storage.maxTodoId);
@@ -102,5 +105,22 @@ const displayController = (() => {
     editDialogBox.showModal();
   }
 
-  pageContainer.append(header(), nav(), main);
+  function updateTodoListDisplay(todoList) {
+    main.textContent = '';
+    todoList.forEach((todo) => {
+      main.appendChild(todoComponent(todo));
+    });
+  }
+
+  function clickHandlerNavProject(ev) {
+    const project = storage.projects.find(
+      (proj) =>
+        proj.id === +ev.target.closest('[data-project-id]').dataset.projectId
+    );
+    updateTodoListDisplay(
+      storage.todos.filter((todo) => todo.project === project.title)
+    );
+  }
+
+  pageContainer.append(header(), navComponent, main);
 })();

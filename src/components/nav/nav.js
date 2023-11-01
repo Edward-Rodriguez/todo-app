@@ -82,7 +82,7 @@ export const nav = () => {
     projectsContainer.removeChild(menuItemToRemove);
     storage.removeProject(projectIdToRemove);
 
-    // remove all associated todo's
+    // remove all associated todo's from storage
     storage.todos = storage.todos.filter(
       (todo) => todo.project !== projectToRemove.title
     );
