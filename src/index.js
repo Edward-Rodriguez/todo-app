@@ -86,7 +86,6 @@ const displayController = (() => {
   addTaskButton.setAttribute('id', 'add-task-btn');
   addTaskButton.prepend(addTaskIcon);
   addTaskButton.prepend(addTaskFilledIcon);
-  main.appendChild(addTaskButton);
 
   addTaskButton.addEventListener('click', clickHandlerAddTaskButton);
   const navComponent = nav();
@@ -108,8 +107,9 @@ const displayController = (() => {
   function updateTodoListDisplay(todoList) {
     main.textContent = '';
     todoList.forEach((todo) => {
-      main.appendChild(todoComponent(todo));
+      main.prepend(todoComponent(todo));
     });
+    main.appendChild(addTaskButton);
   }
 
   function clickHandlerNavProject(ev) {
