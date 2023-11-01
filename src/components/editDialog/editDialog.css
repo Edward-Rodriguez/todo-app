@@ -1,5 +1,5 @@
 dialog {
-  border: 1px solid #6c7ae0;
+  border: 1px solid #379580;
   border-radius: 8px;
   margin: 20vh auto;
   padding: 16px;
@@ -80,30 +80,30 @@ select {
 }
 
 #save-btn {
-  background-color: #377b95;
+  background-color: #379580;
   color: #fff;
 }
 
 #cancel-btn {
   background-color: #fff;
-  color: #377b95;
+  color: #379580;
 }
 
 #save-btn:hover,
 #save-btn:focus {
   background-color: #fff;
-  color: #377b95;
+  color: #379580;
 }
 
 #save-btn:active {
-  background-color: #377b95;
+  background-color: #379580;
   color: #fff;
 }
 
 #cancel-btn:hover,
 #cancel-btn:focus {
-  background-color: #ebf2f4;
-  color: #2c6277;
+  background-color: #83888a;
+  color: #fff;
 }
 
 .submit-btns button {
