@@ -102,6 +102,12 @@ const displayController = (() => {
     const editDialogBox = editDialog(newTodo);
     document.documentElement.appendChild(editDialogBox);
     editDialogBox.showModal();
+    editDialogBox.addEventListener('close', () => {
+      main.insertBefore(
+        todoComponent(storage.todos.find((todo) => todo.id === newTodo.id)),
+        addTaskButton
+      );
+    });
   }
 
   function updateTodoListDisplay(todoList) {
