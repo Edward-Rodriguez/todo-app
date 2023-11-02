@@ -1,6 +1,6 @@
 import './editDialog.css';
 import format from 'date-fns/format';
-import formComponent from './formControl';
+import formComponent from '../formControl/formControl';
 import checklistComponent from './checklist';
 import Storage from '../../storage';
 

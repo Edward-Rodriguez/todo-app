@@ -37,3 +37,27 @@
 .project-delete-icon:hover {
   scale: 1.2;
 }
+
+#project-header {
+  display: flex;
+  height: 24px;
+  width: auto;
+  padding-right: 27px;
+}
+
+#project-header button {
+  border: none;
+  background-color: inherit;
+  margin-left: auto;
+  border-radius: 4px;
+  display: none;
+}
+
+#project-header:hover button {
+  display: inline;
+}
+
+#proj-add-icon:hover {
+  cursor: pointer;
+  background-color: #fff;
+}

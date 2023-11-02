@@ -5,10 +5,8 @@ import CalendarTodayIcon from './calendar_today_icon.svg';
 import CalendarIcon from './calendar_month_icon.svg';
 import CalendarUpcomingIcon from './event_upcoming_icon.svg';
 import CloseIconRed from '../../assets/img/close_icon_red.svg';
-import RedDotIcon from './reddish_fill.svg';
-import GreenDotIcon from './reddish_fill.svg';
-import PurpleDotcon from './reddish_fill.svg';
-import TurquoiseDotIcon from './reddish_fill.svg';
+import AddIconGreen from '../../assets/img/add_icon_green.svg';
+import projectDialog from '../projectDialog/projectDialog';
 import './nav.css';
 
 export const nav = () => {
@@ -36,18 +34,25 @@ export const nav = () => {
   const projectsContainer = document.createElement('div');
   const projectsHeader = document.createElement('header');
   const heading = document.createElement('h1');
-  const fillIcons = [RedDotIcon, GreenDotIcon, PurpleDotcon, TurquoiseDotIcon];
+  const addProjectButton = document.createElement('button');
+  const addButtonIcon = document.createElement('img');
 
   projectsContainer.setAttribute('id', 'projects-container');
+  projectsHeader.setAttribute('id', 'project-header');
   heading.textContent = 'Projects';
-  projectsHeader.appendChild(heading);
+  addButtonIcon.src = AddIconGreen;
+  addButtonIcon.setAttribute('id', 'proj-add-icon');
+  addProjectButton.appendChild(addButtonIcon);
+  projectsHeader.append(heading, addProjectButton);
   projectsContainer.append(projectsHeader);
+
+  addProjectButton.addEventListener('click', clickHandlerAddProject);
 
   storage.projects.forEach((project) => {
     const projectMenuLink = menuLink(
       project.title,
-      storage.projects.filter((proj) => proj.id === project.id).length,
-      randomFillPicker()
+      storage.projects.filter((proj) => proj.id === project.id).length
+      // randomFillPicker()
     );
     const deleteIcon = document.createElement('img');
 
@@ -58,20 +63,6 @@ export const nav = () => {
     projectsContainer.appendChild(projectMenuLink);
     deleteIcon.addEventListener('click', (ev) => clickHandlerDelete(ev));
   });
-
-  function randomFillPicker() {
-    const previousFill = nav.querySelector(
-      '.menu-item:last-child .menu-icon'
-    ).src;
-    const newFill = fillIcons[randomIndex(fillIcons)];
-    while (newFill === previousFill) {
-      newFill = fillIcons[randomIndex(fillIcons)];
-    }
-    function randomIndex(arr) {
-      return Math.floor(Math.random() * arr.length);
-    }
-    return newFill;
-  }
 
   function clickHandlerDelete(ev) {
     const menuItemToRemove = ev.target.closest('.menu-item');
@@ -86,6 +77,12 @@ export const nav = () => {
     storage.todos = storage.todos.filter(
       (todo) => todo.project !== projectToRemove.title
     );
+  }
+
+  function clickHandlerAddProject() {
+    const projectDialogBox = projectDialog();
+    document.documentElement.appendChild(projectDialogBox);
+    projectDialogBox.showModal();
   }
 
   nav.appendChild(projectsContainer);

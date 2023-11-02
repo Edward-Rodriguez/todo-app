@@ -1,0 +1,53 @@
+.project-dialog {
+  display: grid;
+  grid-template: min-content min-content auto / min-content auto;
+  /* grid-template-areas: 
+   'color title'
+   'color buttons'; */
+}
+
+#dropdown {
+  width: 100px;
+  height: auto;
+}
+
+#dropdown label {
+  display: block;
+}
+
+#dropdown button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #949494;
+  border-radius: 4px;
+  padding: 0px 8px;
+  background-color: inherit;
+}
+
+#dropdown button:hover {
+  cursor: pointer;
+}
+#dropdown ul {
+  list-style-type: none;
+  border: 1px solid #eeeeee;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  display: none;
+  overflow: hidden;
+}
+
+#dropdown .expanded {
+  display: block;
+}
+
+#dropdown li {
+  display: flex;
+  align-items: center;
+  padding: 0px 8px;
+}
+
+#dropdown li:hover {
+  cursor: pointer;
+  background-color: #eeeeee;
+}
