@@ -1,12 +1,20 @@
 .menu-item {
   display: grid;
+  grid-template-rows: 24px;
   grid-template-columns: 24px auto 24px;
   grid-template-areas: 'icon title count';
   background-color: inherit;
   border-radius: 8px;
   align-items: center;
+  align-content: center;
   padding: 12px 20px;
   gap: 8px;
+}
+
+.menu-item > * {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .menu-item:active,
@@ -20,11 +28,12 @@
 
 .menu-icon {
   grid-area: icon;
-  max-width: 20px;
+  width: auto;
 }
 
 .menu-item-title {
   grid-area: title;
+  padding-bottom: 2px;
 }
 
 .menu-item-count {

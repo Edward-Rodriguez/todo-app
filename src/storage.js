@@ -43,6 +43,14 @@ export default function Storage() {
     localStorage.setItem(projects_key, JSON.stringify(projects));
   }
 
+  function updateProjectTodos(projectId, newTodos) {
+    const indexToUpdate = projects.findIndex(
+      (project) => project.id === projectId
+    );
+    projects[indexToUpdate].todos = newTodos;
+    localStorage.setItem(projects_key, JSON.stringify(projects));
+  }
+
   function removeProject(projectId) {
     localStorage.setItem(
       projects_key,
@@ -73,6 +81,7 @@ export default function Storage() {
     updateTodo,
     addProject,
     updateProject,
+    updateProjectTodos,
     removeProject,
     get maxTodoId() {
       return maxTodoId;

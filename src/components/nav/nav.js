@@ -57,7 +57,7 @@ export const nav = () => {
     storage.projects.forEach((project) => {
       const projectMenuLink = menuLink(
         project.title,
-        storage.projects.filter((proj) => proj.id === project.id).length,
+        project.todos.length,
         fillIcons[project.color]
       );
       const deleteIcon = document.createElement('img');

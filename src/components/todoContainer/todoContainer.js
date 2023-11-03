@@ -5,6 +5,7 @@ import EditIcon from './edit-icon.svg';
 import Storage from '../../storage';
 import './todoContainer.css';
 import editDialog from '../editDialog/editDialog';
+import Project from '../../project';
 
 export default function todoContainer(todo) {
   let todoDiv = document.createElement('div');
@@ -118,6 +119,15 @@ export default function todoContainer(todo) {
     todoDiv.parentElement.removeChild(todoDiv);
     const storage = Storage();
     storage.removeTodo(todo.id);
+    const project = storage.projects.find(
+      (proj) => proj.title === todo.project
+    );
+    const updatedProjectTodoList = project.todos;
+    const indexToRemove = project.todos.findIndex(
+      (projectTodo) => projectTodo.id === todo.id
+    );
+    updatedProjectTodoList.splice(indexToRemove, 1);
+    storage.updateProjectTodos(project.id, updatedProjectTodoList);
   }
 
   dropdownButton.addEventListener('click', clickHandlerDropdown);
