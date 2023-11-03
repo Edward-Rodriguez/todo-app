@@ -1,23 +1,14 @@
 import Storage from '../../storage';
 import formComponent from '../formControl/formControl';
-import RedDotIcon from './reddish_fill.svg';
-import GreenDotIcon from './greenish_fill.svg';
-import PurpleDotcon from './purple_fill.svg';
-import TurquoiseDotIcon from './base_fill.svg';
-import GrayDotIcon from './gray_fill.svg';
+import { fillIcons } from '../nav/fillIcons';
+import Project from '../../project';
 import './projectDialog.css';
 
 export default function projectDialog() {
   const storage = Storage();
   const projectDialogBox = document.createElement('dialog');
   const form = document.createElement('form');
-  const fillIcons = {
-    gray: GrayDotIcon,
-    red: RedDotIcon,
-    green: GreenDotIcon,
-    purple: PurpleDotcon,
-    turquoise: TurquoiseDotIcon,
-  };
+
   form.classList.add('project-form');
   form.setAttribute('method', 'dialog');
   projectDialogBox.classList.add('project-dialog');
@@ -114,7 +105,14 @@ export default function projectDialog() {
     }
   }
 
-  function onSubmit() {}
+  function onSubmit() {
+    const newProject = Project(++storage.maxProjectId);
+    newProject.title = titleComponent.inputField.value;
+    newProject.color = selectedColorName.textContent.toLowerCase();
+    // console.log(newProject);
+    storage.addProject(newProject);
+    projectDialogBox.close();
+  }
 
   function clickHandlerCancel(ev) {
     ev.preventDefault();

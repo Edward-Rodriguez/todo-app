@@ -110,6 +110,7 @@ const displayController = (() => {
     });
   }
 
+  // refresh list of todos displayed
   function updateTodoListDisplay(todoList) {
     main.textContent = '';
     todoList.forEach((todo) => {
@@ -118,6 +119,7 @@ const displayController = (() => {
     main.appendChild(addTaskButton);
   }
 
+  // filter list of todos based on project
   function clickHandlerNavProject(ev) {
     const project = storage.projects.find(
       (proj) =>

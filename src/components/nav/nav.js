@@ -7,6 +7,7 @@ import CalendarUpcomingIcon from './event_upcoming_icon.svg';
 import CloseIconRed from '../../assets/img/close_icon_red.svg';
 import AddIconGreen from '../../assets/img/add_icon_green.svg';
 import projectDialog from '../projectDialog/projectDialog';
+import { fillIcons } from './fillIcons';
 import './nav.css';
 
 export const nav = () => {
@@ -51,8 +52,8 @@ export const nav = () => {
   storage.projects.forEach((project) => {
     const projectMenuLink = menuLink(
       project.title,
-      storage.projects.filter((proj) => proj.id === project.id).length
-      // randomFillPicker()
+      storage.projects.filter((proj) => proj.id === project.id).length,
+      fillIcons[project.color]
     );
     const deleteIcon = document.createElement('img');
 

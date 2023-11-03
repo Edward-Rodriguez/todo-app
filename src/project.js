@@ -1,4 +1,4 @@
-export default function Project(title, todos, color) {
+export default function Project(id, title, todos, color) {
   return {
     get id() {
       return id;
