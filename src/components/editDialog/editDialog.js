@@ -3,6 +3,7 @@ import format from 'date-fns/format';
 import formComponent from '../formControl/formControl';
 import checklistComponent from './checklist';
 import Storage from '../../storage';
+import Project from '../../project';
 
 export default function editDialog(todo) {
   const storage = Storage();
@@ -98,14 +99,28 @@ export default function editDialog(todo) {
       textarea ? checklist.push(textarea.value) : '';
     });
     todo.checklist = checklist;
-    storage.todos.find((existingTodo) => existingTodo.id === todo.id)
-      ? storage.updateTodo(todo.id, todo)
-      : storage.addTodo(todo);
+    updateLocalStorage(todo);
   }
 
   function clickHandlerCancel(ev) {
     ev.preventDefault();
     editDialogBox.close();
+  }
+
+  function updateLocalStorage(todo) {
+    storage.todos.find((existingTodo) => existingTodo.id === todo.id)
+      ? storage.updateTodo(todo.id, todo)
+      : storage.addTodo(todo);
+
+    const project = storage.projects.find(
+      (existingProject) => existingProject.title === todo.project
+    );
+    const updatedProjectTodoList = project.todos;
+    updatedProjectTodoList.push(todo);
+    storage.updateProject(
+      project.id,
+      Project(project.id, project.title, updatedProjectTodoList, project.color)
+    );
   }
 
   form.append(

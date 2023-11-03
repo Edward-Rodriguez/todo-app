@@ -121,7 +121,6 @@ const displayController = (() => {
 
   // filter list of todos based on project
   function clickHandlerNavProject(ev) {
-    debugger;
     if (!ev.target.classList.contains('project-delete-icon')) {
       // if not clicking delete button
       const project = storage.projects.find(

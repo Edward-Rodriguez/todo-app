@@ -22,7 +22,6 @@ export default function Storage() {
   }
 
   function updateTodo(todoId, updatedTodo) {
-    console.log(todos);
     const indexToUpdate = todos.findIndex((todo) => todo.id === todoId);
     todos[indexToUpdate] = updatedTodo;
     localStorage.setItem(todos_key, JSON.stringify(todos));
@@ -33,6 +32,14 @@ export default function Storage() {
     if (dupTitleCount > 0) newProject.title += `(${dupTitleCount})`;
     maxProjectId++;
     projects.push(newProject);
+    localStorage.setItem(projects_key, JSON.stringify(projects));
+  }
+
+  function updateProject(projectId, updatedProject) {
+    const indexToUpdate = projects.findIndex(
+      (project) => project.id === projectId
+    );
+    projects[indexToUpdate] = updatedProject;
     localStorage.setItem(projects_key, JSON.stringify(projects));
   }
 
@@ -65,6 +72,7 @@ export default function Storage() {
     removeTodo,
     updateTodo,
     addProject,
+    updateProject,
     removeProject,
     get maxTodoId() {
       return maxTodoId;

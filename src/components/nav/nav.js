@@ -48,22 +48,28 @@ export const nav = () => {
   projectsContainer.append(projectsHeader);
 
   addProjectButton.addEventListener('click', clickHandlerAddProject);
+  refreshProjectList();
 
-  storage.projects.forEach((project) => {
-    const projectMenuLink = menuLink(
-      project.title,
-      storage.projects.filter((proj) => proj.id === project.id).length,
-      fillIcons[project.color]
-    );
-    const deleteIcon = document.createElement('img');
+  function refreshProjectList() {
+    while (projectsContainer.children.length > 1) {
+      projectsContainer.removeChild(projectsContainer.lastChild);
+    }
+    storage.projects.forEach((project) => {
+      const projectMenuLink = menuLink(
+        project.title,
+        storage.projects.filter((proj) => proj.id === project.id).length,
+        fillIcons[project.color]
+      );
+      const deleteIcon = document.createElement('img');
 
-    deleteIcon.classList.add('project-delete-icon');
-    deleteIcon.src = CloseIconRed;
-    projectMenuLink.dataset.projectId = project.id;
-    projectMenuLink.prepend(deleteIcon);
-    projectsContainer.appendChild(projectMenuLink);
-    deleteIcon.addEventListener('click', (ev) => clickHandlerDelete(ev));
-  });
+      deleteIcon.classList.add('project-delete-icon');
+      deleteIcon.src = CloseIconRed;
+      projectMenuLink.dataset.projectId = project.id;
+      projectMenuLink.prepend(deleteIcon);
+      projectsContainer.appendChild(projectMenuLink);
+      deleteIcon.addEventListener('click', (ev) => clickHandlerDelete(ev));
+    });
+  }
 
   function clickHandlerDelete(ev) {
     const menuItemToRemove = ev.target.closest('.menu-item');
@@ -84,6 +90,7 @@ export const nav = () => {
     const projectDialogBox = projectDialog();
     document.documentElement.appendChild(projectDialogBox);
     projectDialogBox.showModal();
+    projectDialogBox.addEventListener('close', () => refreshProjectList());
   }
 
   nav.appendChild(projectsContainer);

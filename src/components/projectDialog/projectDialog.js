@@ -109,6 +109,7 @@ export default function projectDialog() {
     const newProject = Project(++storage.maxProjectId);
     newProject.title = titleComponent.inputField.value;
     newProject.color = selectedColorName.textContent.toLowerCase();
+    newProject.todos = [];
     // console.log(newProject);
     storage.addProject(newProject);
     projectDialogBox.close();
