@@ -107,12 +107,14 @@ export default function projectDialog() {
 
   function onSubmit() {
     const newProject = Project(++storage.maxProjectId);
-    newProject.title = titleComponent.inputField.value;
-    newProject.color = selectedColorName.textContent.toLowerCase();
-    newProject.todos = [];
-    // console.log(newProject);
-    storage.addProject(newProject);
-    projectDialogBox.close();
+    const inputTitle = titleComponent.inputField.value;
+    if (inputTitle) {
+      newProject.title = inputTitle;
+      newProject.color = selectedColorName.textContent.toLowerCase();
+      newProject.todos = [];
+      storage.addProject(newProject);
+      projectDialogBox.close();
+    }
   }
 
   function clickHandlerCancel(ev) {

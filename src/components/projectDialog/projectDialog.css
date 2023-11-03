@@ -86,3 +86,12 @@ input[name='project-title'] {
   cursor: pointer;
   background-color: #eeeeee;
 }
+
+label[for='project-title']::after {
+  content: '*';
+  color: red;
+}
+
+.error {
+  background-color: rgb(255, 231, 231);
+}
