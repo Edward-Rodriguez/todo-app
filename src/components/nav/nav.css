@@ -20,6 +20,7 @@
 
 #projects-container .menu-item:hover img {
   display: inline;
+  opacity: 0.5;
 }
 
 .menu-item .project-delete-icon {
@@ -34,7 +35,8 @@
   display: none;
 }
 
-.project-delete-icon:hover {
+#projects-container img.project-delete-icon:hover {
+  opacity: 1;
   scale: 1.2;
 }
 
@@ -50,6 +52,10 @@
   background-color: inherit;
   margin-left: auto;
   border-radius: 4px;
+  display: none;
+}
+
+#proj-add-icon {
   display: none;
 }
 
