@@ -94,7 +94,6 @@ export default function todoContainer(todo) {
       const updatedTodo = Storage().todos.find(
         (updatedTodo) => updatedTodo.id === todo.id
       );
-      console.log(updatedTodo);
       todoDiv.parentElement.replaceChild(todoContainer(updatedTodo), todoDiv);
     }
 

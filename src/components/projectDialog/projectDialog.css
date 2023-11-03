@@ -1,14 +1,47 @@
 .project-dialog {
+  overflow: visible;
+  width: 350px;
+  height: 175px;
+}
+
+.project-dialog h1 {
+  font-size: 1.2rem;
+  color: #379580;
+  padding-bottom: 8px;
+}
+
+.project-dialog .project-form {
   display: grid;
-  grid-template: min-content min-content auto / min-content auto;
-  /* grid-template-areas: 
-   'color title'
-   'color buttons'; */
+  grid-template: auto auto/ auto min-content;
+  grid-template-areas:
+    'title title'
+    'color buttons';
+  align-items: center;
+  position: relative;
+  gap: 20px;
+}
+.project-form .form-control {
+  grid-area: title;
+}
+
+.project-form .submit-btns {
+  grid-area: buttons;
+}
+
+input[name='project-title'] {
+  border: 1px solid #949494;
+  border-radius: 4px;
+  outline: none;
+  padding: 4px;
+  font-size: 1rem;
 }
 
 #dropdown {
   width: 100px;
   height: auto;
+  position: absolute;
+  left: 0px;
+  top: 55%;
 }
 
 #dropdown label {
@@ -29,8 +62,10 @@
   cursor: pointer;
 }
 #dropdown ul {
+  background-color: #fff;
   list-style-type: none;
-  border: 1px solid #eeeeee;
+  border: 1px solid #949494;
+  border-top: none;
   border-radius: 4px;
   font-size: 0.8rem;
   display: none;

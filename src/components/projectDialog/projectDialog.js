@@ -25,12 +25,12 @@ export default function projectDialog() {
   const heading = document.createElement('h1');
   heading.textContent = 'Add Project';
 
-  const titleComponent = formComponent('input', 'Project name', {
+  const titleComponent = formComponent('input', 'Name', {
     type: 'text',
     name: 'project-title',
     id: 'project-title',
-    required: true,
-    placeholder: 'Add a project name',
+    required: '',
+    placeholder: 'Enter a project name',
   });
   titleComponent.formRow.classList.add('form-row');
 
@@ -64,9 +64,28 @@ export default function projectDialog() {
 
   dropdown.append(colorHeading, dropdownButton, colorList);
   dropdownButton.addEventListener('click', clickHandlerColorButton);
-  form.append(titleComponent.formRow, dropdown);
+
+  // cancel & save buttons
+  const cancelButton = document.createElement('button');
+  const saveButton = document.createElement('button');
+  const buttonFormRow = document.createElement('div');
+  buttonFormRow.classList.add('submit-btns', 'form-row');
+  cancelButton.setAttribute('id', 'cancel-btn');
+  cancelButton.setAttribute('formmethod', 'dialog');
+  cancelButton.textContent = 'Cancel';
+  cancelButton.value = 'cancel';
+  saveButton.setAttribute('id', 'save-btn');
+  saveButton.setAttribute('type', 'submit');
+  saveButton.textContent = 'Save';
+  buttonFormRow.append(cancelButton, saveButton);
+  //   saveButton.addEventListener('click', onSubmit);
+  //   cancelButton.addEventListener('click', clickHandlerCancel);
+
+  form.append(titleComponent.formRow, dropdown, buttonFormRow);
   projectDialogBox.addEventListener('click', clickHandlerDropdown);
   projectDialogBox.append(heading, form);
+  cancelButton.addEventListener('click', clickHandlerCancel);
+  saveButton.addEventListener('click', onSubmit);
 
   function capitalize(word) {
     return word[0].toUpperCase() + word.substring(1);
@@ -93,6 +112,13 @@ export default function projectDialog() {
     ) {
       colorList.classList.toggle('expanded');
     }
+  }
+
+  function onSubmit() {}
+
+  function clickHandlerCancel(ev) {
+    ev.preventDefault();
+    projectDialogBox.close();
   }
 
   return projectDialogBox;

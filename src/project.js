@@ -1,8 +1,4 @@
-let projectId = 0;
-
-export default function Project(title, todos) {
-  const id = ++projectId;
-
+export default function Project(title, todos, color) {
   return {
     get id() {
       return id;
@@ -18,6 +14,12 @@ export default function Project(title, todos) {
     },
     set todos(newTodos) {
       todos = newTodos;
+    },
+    get color() {
+      return color;
+    },
+    set color(newColor) {
+      color = newColor;
     },
   };
 }

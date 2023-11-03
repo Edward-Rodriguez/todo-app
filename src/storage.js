@@ -96,5 +96,8 @@ export default function Storage() {
       projects = JSON.parse(localStorage.getItem(projects_key)) || [];
       return projects;
     },
+    set projects(newProjects) {
+      localStorage.setItem(projects_key, JSON.stringify(newProjects));
+    },
   };
 }
