@@ -7,8 +7,6 @@ dialog {
 
 .form {
   display: grid;
-  width: 200px;
-  height: 40px;
   grid-auto-flow: row;
   gap: 24px;
 }

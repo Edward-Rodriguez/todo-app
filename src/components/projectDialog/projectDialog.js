@@ -37,7 +37,7 @@ export default function projectDialog() {
   dropdown.setAttribute('id', 'dropdown');
   colorHeading.setAttribute('for', 'dropdown');
   colorHeading.textContent = 'Color';
-  selectedColor.src = GrayDotIcon;
+  selectedColor.src = fillIcons.gray;
   selectedColorName.textContent = 'Gray';
   dropdownButton.setAttribute('type', 'button');
   dropdownButton.append(selectedColor, selectedColorName);

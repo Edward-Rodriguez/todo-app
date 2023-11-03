@@ -121,13 +121,17 @@ const displayController = (() => {
 
   // filter list of todos based on project
   function clickHandlerNavProject(ev) {
-    const project = storage.projects.find(
-      (proj) =>
-        proj.id === +ev.target.closest('[data-project-id]').dataset.projectId
-    );
-    updateTodoListDisplay(
-      storage.todos.filter((todo) => todo.project === project.title)
-    );
+    debugger;
+    if (!ev.target.classList.contains('project-delete-icon')) {
+      // if not clicking delete button
+      const project = storage.projects.find(
+        (proj) =>
+          proj.id === +ev.target.closest('[data-project-id]').dataset.projectId
+      );
+      updateTodoListDisplay(
+        storage.todos.filter((todo) => todo.project === project.title)
+      );
+    }
   }
 
   pageContainer.append(header(), navComponent, main);
