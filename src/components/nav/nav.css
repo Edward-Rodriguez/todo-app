@@ -58,6 +58,10 @@
   display: inline;
 }
 
+#project-header:hover #proj-add-icon {
+  display: inline;
+}
+
 #proj-add-icon:hover {
   cursor: pointer;
   background-color: #fff;

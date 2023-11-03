@@ -18,62 +18,6 @@ const displayController = (() => {
   const addTaskFilledIcon = document.createElement('img');
   const main = document.createElement('main');
 
-  // delete after completing
-  const new_todo = Todo(
-    storage.maxTodoId,
-    'Read 5 pages',
-    format(new Date(2023, 9, 18), 'yyyy-MM-dd')
-  );
-  // storage.addTodo(new_todo);
-
-  const new_todo2 = Todo(
-    storage.maxTodoId,
-    'Exercise for 30min',
-    format(new Date(2023, 9, 17), 'yyyy-MM-dd'),
-    'high',
-    'Daily',
-    'Interval training on exercise bike',
-    [
-      'read while biking',
-      'increase intensity by 1',
-      'do arm strengthening exercises while biking',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-    ]
-  );
-  // storage.addTodo(new_todo2);
-
-  const new_todo3 = Todo(
-    storage.maxTodoId,
-    'Walk the dog',
-    format(new Date(2023, 9, 17), 'yyyy-MM-dd'),
-    'medium',
-    'Daily',
-    'Interval training on exercise bike',
-    ['read while biking', 'do arm strengthening exercises while biking']
-  );
-  // storage.addTodo(new_todo3);
-
-  const new_todo7 = Todo(
-    storage.maxTodoId,
-    'Read 5 pages',
-    format(new Date(2024, 9, 17), 'yyyy-MM-dd'),
-    'medium',
-    'Daily',
-    'Interval training on exercise bike',
-    ['read while biking', 'do arm strengthening exercises while biking']
-  );
-  // storage.addTodo(new_todo7);
-
-  const project = Project('Daily', [new_todo2, new_todo3]);
-  const project2 = Project('TestProject', [new_todo, new_todo2]);
-  const project3 = Project('Test3Proj', [new_todo, new_todo2]);
-  const project4 = Project('Project5', [new_todo, new_todo2]);
-
-  // storage.removeProject(3);
-  // storage.removeTodo(1);
-  // storage.addProject(project);
-  // storage.addProject(project3);
-  // storage.addProject(project4); ///
   updateTodoListDisplay(storage.todos);
 
   pageContainer.setAttribute('id', 'page-container');
@@ -103,10 +47,10 @@ const displayController = (() => {
     document.documentElement.appendChild(editDialogBox);
     editDialogBox.showModal();
     editDialogBox.addEventListener('close', () => {
-      main.insertBefore(
-        todoComponent(storage.todos.find((todo) => todo.id === newTodo.id)),
-        addTaskButton
-      );
+      const todoExists = storage.todos.find((todo) => todo.id === newTodo.id);
+      if (todoExists) {
+        main.insertBefore(todoComponent(todoExists), addTaskButton);
+      }
     });
   }
 
