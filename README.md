@@ -2,4 +2,4 @@
 
 Todo List App project
 
-Live preview: [Coming Soon...]()
+Live preview: [here](https://edward-rodriguez.github.io/todo-app/)
