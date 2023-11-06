@@ -1,6 +1,7 @@
+/* eslint-disable no-use-before-define */
 import Storage from '../../storage';
 import formComponent from '../formControl/formControl';
-import { fillIcons } from '../nav/fillIcons';
+import fillIcons from '../nav/fillIcons';
 import Project from '../../project';
 import './projectDialog.css';
 
@@ -42,7 +43,7 @@ export default function projectDialog() {
   dropdownButton.setAttribute('type', 'button');
   dropdownButton.append(selectedColor, selectedColorName);
 
-  for (const [key, value] of Object.entries(fillIcons)) {
+  Object.entries(fillIcons).forEach(([key, value]) => {
     const listItem = document.createElement('li');
     const color = document.createElement('img');
     const colorName = document.createElement('span');
@@ -51,7 +52,7 @@ export default function projectDialog() {
     listItem.append(color, colorName);
     colorList.appendChild(listItem);
     listItem.addEventListener('click', clickHandlerColorList);
-  }
+  });
 
   dropdown.append(colorHeading, dropdownButton, colorList);
   dropdownButton.addEventListener('click', clickHandlerColorButton);
@@ -106,7 +107,7 @@ export default function projectDialog() {
   }
 
   function onSubmit() {
-    const newProject = Project(++storage.maxProjectId);
+    const newProject = Project((storage.maxProjectId += 1));
     const inputTitle = titleComponent.inputField.value;
     if (inputTitle) {
       newProject.title = inputTitle;

@@ -46,7 +46,7 @@ export default function editDialog(todo) {
       name: 'priority',
       id: 'priority',
     },
-    ['Low', 'Medium', 'High']
+    ['Low', 'Medium', 'High'],
   );
 
   const projectList = [];
@@ -60,7 +60,7 @@ export default function editDialog(todo) {
       name: 'project',
       id: 'project',
     },
-    projectList
+    projectList,
   );
 
   const selectionFormRow = document.createElement('div');
@@ -68,7 +68,7 @@ export default function editDialog(todo) {
   selectionFormRow.append(
     dueDateComponent.formRow,
     priorityComponent.formRow,
-    projectComponent.formRow
+    projectComponent.formRow,
   );
 
   const checklistDiv = checklistComponent(todo);
@@ -93,7 +93,7 @@ export default function editDialog(todo) {
     todo.dueDate = dueDateComponent.inputField.value;
     todo.priority = priorityComponent.inputField.value.toLowerCase();
     todo.project = projectComponent.inputField.value;
-    let checklist = [];
+    const checklist = [];
     Array.from(checklistDiv.children).forEach((child) => {
       const textarea = child.querySelector("textarea[name='checklist'");
       textarea ? checklist.push(textarea.value) : '';
@@ -111,16 +111,6 @@ export default function editDialog(todo) {
     storage.todos.find((existingTodo) => existingTodo.id === todo.id)
       ? storage.updateTodo(todo.id, todo)
       : storage.addTodo(todo);
-
-    const project = storage.projects.find(
-      (existingProject) => existingProject.title === todo.project
-    );
-    const updatedProjectTodoList = project.todos;
-    updatedProjectTodoList.push(todo);
-    storage.updateProject(
-      project.id,
-      Project(project.id, project.title, updatedProjectTodoList, project.color)
-    );
   }
 
   form.append(
@@ -128,7 +118,7 @@ export default function editDialog(todo) {
     notesComponent.formRow,
     selectionFormRow,
     checklistDiv,
-    buttonFormRow
+    buttonFormRow,
   );
   editDialogBox.append(form);
   return editDialogBox;

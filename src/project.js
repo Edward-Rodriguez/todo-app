@@ -1,4 +1,5 @@
-export default function Project(id, title, todos, color) {
+/* eslint-disable no-param-reassign */
+export default function Project(id, title, color) {
   return {
     get id() {
       return id;
@@ -8,12 +9,6 @@ export default function Project(id, title, todos, color) {
     },
     set title(newTitle) {
       title = newTitle;
-    },
-    get todos() {
-      return todos;
-    },
-    set todos(newTodos) {
-      todos = newTodos;
     },
     get color() {
       return color;

@@ -35,9 +35,8 @@ import './assets/css/index.css';
   const navComponent = navigation();
   const navProjectList = navComponent.querySelectorAll('[data-project-id]');
 
-  Array.from(navProjectList).forEach((navProjectItem) => {
-    // prettier-ignore
-    navProjectItem.addEventListener('click', (ev) => clickHandlerNavProject(ev));
+  Array.from(navProjectList).forEach((navItem) => {
+    navItem.addEventListener('click', (ev) => clickHandlerNavProject(ev));
   });
 
   function clickHandlerAddTaskButton() {
@@ -66,10 +65,10 @@ import './assets/css/index.css';
   function clickHandlerNavProject(ev) {
     if (!ev.target.classList.contains('project-delete-icon')) {
       // if not clicking delete button
-      const project = storage.projects.find(
-        // prettier-ignore
-        (proj) => proj.id === +ev.target.closest('[data-project-id]').dataset.projectId,
-      );
+      const project = storage.projects.find((proj) => {
+        const parentMenuItem = ev.target.closest('[data-project-id]');
+        return proj.id === +parentMenuItem.dataset.projectId;
+      });
       updateTodoListDisplay(
         storage.todos.filter((todo) => todo.project === project.title),
       );

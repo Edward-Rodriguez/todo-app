@@ -1,67 +1,54 @@
+/* eslint-disable no-use-before-define */
 export default function Storage() {
-  const todos_key = 'todos';
-  const projects_key = 'projects';
-  let todos = JSON.parse(localStorage.getItem(todos_key)) || [];
-  let projects = JSON.parse(localStorage.getItem(projects_key)) || [];
+  const todosKey = 'todos';
+  const projectsKey = 'projects';
+  let todos = JSON.parse(localStorage.getItem(todosKey)) || [];
+  let projects = JSON.parse(localStorage.getItem(projectsKey)) || [];
   let maxTodoId = getMaxId(todos);
   let maxProjectId = getMaxId(projects);
 
   function addTodo(newTodo) {
     const dupTitleCount = duplicateTitleCount(todos, newTodo.title);
-    if (dupTitleCount > 0) newTodo.title += `(${dupTitleCount})`;
-    maxTodoId++;
+    const newTodoToAdd = newTodo;
+    if (dupTitleCount > 0) newTodoToAdd.title += `(${dupTitleCount})`;
+    maxTodoId += 1;
     todos.push(newTodo);
-    localStorage.setItem(todos_key, JSON.stringify(todos));
+    localStorage.setItem(todosKey, JSON.stringify(todos));
   }
 
   function removeTodo(todoId) {
     localStorage.setItem(
-      todos_key,
-      JSON.stringify(todos.filter((todo) => todo.id !== +todoId))
+      todosKey,
+      JSON.stringify(todos.filter((todo) => todo.id !== +todoId)),
     );
   }
 
   function updateTodo(todoId, updatedTodo) {
     const indexToUpdate = todos.findIndex((todo) => todo.id === todoId);
     todos[indexToUpdate] = updatedTodo;
-    localStorage.setItem(todos_key, JSON.stringify(todos));
+    localStorage.setItem(todosKey, JSON.stringify(todos));
   }
 
   function addProject(newProject) {
     const dupTitleCount = duplicateTitleCount(projects, newProject.title);
-    if (dupTitleCount > 0) newProject.title += `(${dupTitleCount})`;
-    maxProjectId++;
+    const newProjectToAdd = newProject;
+    if (dupTitleCount > 0) newProjectToAdd.title += `(${dupTitleCount})`;
+    maxProjectId += 1;
     projects.push(newProject);
-    localStorage.setItem(projects_key, JSON.stringify(projects));
-  }
-
-  function updateProject(projectId, updatedProject) {
-    const indexToUpdate = projects.findIndex(
-      (project) => project.id === projectId
-    );
-    projects[indexToUpdate] = updatedProject;
-    localStorage.setItem(projects_key, JSON.stringify(projects));
-  }
-
-  function updateProjectTodos(projectId, newTodos) {
-    const indexToUpdate = projects.findIndex(
-      (project) => project.id === projectId
-    );
-    projects[indexToUpdate].todos = newTodos;
-    localStorage.setItem(projects_key, JSON.stringify(projects));
+    localStorage.setItem(projectsKey, JSON.stringify(projects));
   }
 
   function removeProject(projectId) {
     localStorage.setItem(
-      projects_key,
-      JSON.stringify(projects.filter((project) => project.id !== +projectId))
+      projectsKey,
+      JSON.stringify(projects.filter((project) => project.id !== +projectId)),
     );
   }
 
   function duplicateTitleCount(arr, title) {
-    const regex = new RegExp('^' + title + '[(/d)]?');
-    let duplicateCount = arr.filter(
-      (obj) => obj.title === title || regex.test(obj.title)
+    const regex = new RegExp(`^${title}[(/d)]?`);
+    const duplicateCount = arr.filter(
+      (obj) => obj.title === title || regex.test(obj.title),
     ).length;
     return duplicateCount;
   }
@@ -80,41 +67,32 @@ export default function Storage() {
     removeTodo,
     updateTodo,
     addProject,
-    updateProject,
-    updateProjectTodos,
     removeProject,
     get maxTodoId() {
       return maxTodoId;
-      //
     },
     set maxTodoId(newId) {
       maxTodoId = newId;
-      //
-    },
-    set maxProjectId(newProjectId) {
-      maxProjectId = newProjectId;
-      //
-    },
-    set maxTodoId(newId) {
-      maxTodoId = newId;
-      //
     },
     get maxProjectId() {
       return maxProjectId;
     },
+    set maxProjectId(newProjectId) {
+      maxProjectId = newProjectId;
+    },
     get todos() {
-      todos = JSON.parse(localStorage.getItem(todos_key)) || [];
+      todos = JSON.parse(localStorage.getItem(todosKey)) || [];
       return todos;
     },
     set todos(newTodos) {
-      localStorage.setItem(todos_key, JSON.stringify(newTodos));
+      localStorage.setItem(todosKey, JSON.stringify(newTodos));
     },
     get projects() {
-      projects = JSON.parse(localStorage.getItem(projects_key)) || [];
+      projects = JSON.parse(localStorage.getItem(projectsKey)) || [];
       return projects;
     },
     set projects(newProjects) {
-      localStorage.setItem(projects_key, JSON.stringify(newProjects));
+      localStorage.setItem(projectsKey, JSON.stringify(newProjects));
     },
   };
 }

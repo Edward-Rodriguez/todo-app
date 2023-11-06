@@ -4,10 +4,11 @@ import PurpleDotcon from '../../assets/img/purple_fill.svg';
 import TurquoiseDotIcon from '../../assets/img/base_fill.svg';
 import GrayDotIcon from '../../assets/img/gray_fill.svg';
 
-export const fillIcons = {
+const fillIcons = {
   gray: GrayDotIcon,
   red: RedDotIcon,
   green: GreenDotIcon,
   purple: PurpleDotcon,
   turquoise: TurquoiseDotIcon,
 };
+export default fillIcons;

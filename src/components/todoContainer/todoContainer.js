@@ -5,10 +5,9 @@ import EditIcon from './edit-icon.svg';
 import Storage from '../../storage';
 import './todoContainer.css';
 import editDialog from '../editDialog/editDialog';
-import Project from '../../project';
 
 export default function todoContainer(todo) {
-  let todoDiv = document.createElement('div');
+  const todoDiv = document.createElement('div');
   const checkBox = document.createElement('input');
   const titleLabel = document.createElement('label');
   const titleSpan = document.createElement('span');
@@ -93,7 +92,7 @@ export default function todoContainer(todo) {
     function reloadTodo() {
       todoDiv.textContent = '';
       const updatedTodo = Storage().todos.find(
-        (updatedTodo) => updatedTodo.id === todo.id
+        (updatedTodo) => updatedTodo.id === todo.id,
       );
       todoDiv.parentElement.replaceChild(todoContainer(updatedTodo), todoDiv);
     }
@@ -120,11 +119,11 @@ export default function todoContainer(todo) {
     const storage = Storage();
     storage.removeTodo(todo.id);
     const project = storage.projects.find(
-      (proj) => proj.title === todo.project
+      (proj) => proj.title === todo.project,
     );
     const updatedProjectTodoList = project.todos;
     const indexToRemove = project.todos.findIndex(
-      (projectTodo) => projectTodo.id === todo.id
+      (projectTodo) => projectTodo.id === todo.id,
     );
     updatedProjectTodoList.splice(indexToRemove, 1);
     storage.updateProjectTodos(project.id, updatedProjectTodoList);

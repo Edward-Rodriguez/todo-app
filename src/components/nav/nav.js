@@ -8,7 +8,7 @@ import CalendarUpcomingIcon from './event_upcoming_icon.svg';
 import CloseIconRed from '../../assets/img/close_icon_red.svg';
 import AddIconGreen from '../../assets/img/add_icon_green.svg';
 import projectDialog from '../projectDialog/projectDialog';
-import { fillIcons } from './fillIcons';
+import fillIcons from './fillIcons';
 import './nav.css';
 
 export default function navigation() {
@@ -55,10 +55,14 @@ export default function navigation() {
     while (projectsContainer.children.length > 1) {
       projectsContainer.removeChild(projectsContainer.lastChild);
     }
+
     storage.projects.forEach((project) => {
+      const projectTodoCount = storage.todos.filter(
+        (todo) => todo.project === project.title,
+      ).length;
       const projectMenuLink = menuLink(
         project.title,
-        project.todos.length,
+        projectTodoCount,
         fillIcons[project.color],
       );
       const deleteIcon = document.createElement('img');
