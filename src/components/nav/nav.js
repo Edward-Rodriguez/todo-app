@@ -1,5 +1,6 @@
-import menuLink from './menu-link';
+/* eslint-disable no-use-before-define */
 import { format, isAfter } from 'date-fns';
+import menuLink from './menu-link';
 import Storage from '../../storage';
 import CalendarTodayIcon from './calendar_today_icon.svg';
 import CalendarIcon from './calendar_month_icon.svg';
@@ -10,7 +11,7 @@ import projectDialog from '../projectDialog/projectDialog';
 import { fillIcons } from './fillIcons';
 import './nav.css';
 
-export const nav = () => {
+export default function navigation() {
   const storage = Storage();
   const nav = document.createElement('nav');
 
@@ -18,15 +19,15 @@ export const nav = () => {
   const todayLink = menuLink(
     'Today',
     storage.todos.filter(
-      (todo) => todo.dueDate === format(new Date(), 'yyyy-mm-dd')
+      (todo) => todo.dueDate === format(new Date(), 'yyyy-mm-dd'),
     ).length,
-    CalendarTodayIcon
+    CalendarTodayIcon,
   );
   const upcomingLink = menuLink(
     'Upcoming',
     storage.todos.filter((todo) => isAfter(new Date(todo.dueDate), new Date()))
       .length,
-    CalendarUpcomingIcon
+    CalendarUpcomingIcon,
   );
   nav.setAttribute('id', 'sidebar-menu');
   nav.append(allLink, todayLink, upcomingLink);
@@ -58,7 +59,7 @@ export const nav = () => {
       const projectMenuLink = menuLink(
         project.title,
         project.todos.length,
-        fillIcons[project.color]
+        fillIcons[project.color],
       );
       const deleteIcon = document.createElement('img');
 
@@ -75,14 +76,14 @@ export const nav = () => {
     const menuItemToRemove = ev.target.closest('.menu-item');
     const projectIdToRemove = menuItemToRemove.dataset.projectId;
     const projectToRemove = storage.projects.find(
-      (proj) => proj.id === +projectIdToRemove
+      (proj) => proj.id === +projectIdToRemove,
     );
     projectsContainer.removeChild(menuItemToRemove);
     storage.removeProject(projectIdToRemove);
 
     // remove all associated todo's from storage
     storage.todos = storage.todos.filter(
-      (todo) => todo.project !== projectToRemove.title
+      (todo) => todo.project !== projectToRemove.title,
     );
   }
 
@@ -96,4 +97,4 @@ export const nav = () => {
   nav.appendChild(projectsContainer);
 
   return nav;
-};
+}

@@ -1,16 +1,16 @@
-import format from 'date-fns/format';
+/* eslint-disable no-use-before-define */
 import Todo from './todo';
-import Project from './project';
 import Storage from './storage';
 import todoComponent from './components/todoContainer/todoContainer';
-import { nav } from './components/nav/nav';
+import navigation from './components/nav/nav';
 import { header } from './components/header/header';
 import editDialog from './components/editDialog/editDialog';
 import AddIcon from './assets/img/add_icon_green.svg';
 import AddFilledIcon from './assets/img/add_icon_green_filled.svg';
 import './assets/css/index.css';
 
-const displayController = (() => {
+// eslint-disable-next-line wrap-iife
+(function displayController() {
   const storage = Storage();
   const pageContainer = document.querySelector('body');
   const addTaskButton = document.createElement('button');
@@ -32,17 +32,16 @@ const displayController = (() => {
   addTaskButton.prepend(addTaskFilledIcon);
 
   addTaskButton.addEventListener('click', clickHandlerAddTaskButton);
-  const navComponent = nav();
+  const navComponent = navigation();
   const navProjectList = navComponent.querySelectorAll('[data-project-id]');
 
   Array.from(navProjectList).forEach((navProjectItem) => {
-    navProjectItem.addEventListener('click', (ev) =>
-      clickHandlerNavProject(ev)
-    );
+    // prettier-ignore
+    navProjectItem.addEventListener('click', (ev) => clickHandlerNavProject(ev));
   });
 
   function clickHandlerAddTaskButton() {
-    const newTodo = Todo(++storage.maxTodoId);
+    const newTodo = Todo((storage.maxTodoId += 1));
     const editDialogBox = editDialog(newTodo);
     document.documentElement.appendChild(editDialogBox);
     editDialogBox.showModal();
@@ -68,11 +67,11 @@ const displayController = (() => {
     if (!ev.target.classList.contains('project-delete-icon')) {
       // if not clicking delete button
       const project = storage.projects.find(
-        (proj) =>
-          proj.id === +ev.target.closest('[data-project-id]').dataset.projectId
+        // prettier-ignore
+        (proj) => proj.id === +ev.target.closest('[data-project-id]').dataset.projectId,
       );
       updateTodoListDisplay(
-        storage.todos.filter((todo) => todo.project === project.title)
+        storage.todos.filter((todo) => todo.project === project.title),
       );
     }
   }
