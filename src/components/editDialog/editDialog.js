@@ -1,9 +1,9 @@
+/* eslint-disable no-use-before-define */
 import './editDialog.css';
 import format from 'date-fns/format';
 import formComponent from '../formControl/formControl';
 import checklistComponent from './checklist';
 import Storage from '../../storage';
-import Project from '../../project';
 
 export default function editDialog(todo) {
   const storage = Storage();

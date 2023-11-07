@@ -1,4 +1,5 @@
 /* eslint-disable no-use-before-define */
+import { format, isAfter } from 'date-fns';
 import Todo from './todo';
 import Storage from './storage';
 import todoComponent from './components/todoContainer/todoContainer';
@@ -30,13 +31,17 @@ import './assets/css/index.css';
   addTaskButton.setAttribute('id', 'add-task-btn');
   addTaskButton.prepend(addTaskIcon);
   addTaskButton.prepend(addTaskFilledIcon);
-
   addTaskButton.addEventListener('click', clickHandlerAddTaskButton);
+
   const navComponent = navigation();
+  const navMenuItems = navComponent.querySelectorAll('.menu-item');
   const navProjectList = navComponent.querySelectorAll('[data-project-id]');
 
   Array.from(navProjectList).forEach((navItem) => {
     navItem.addEventListener('click', (ev) => clickHandlerNavProject(ev));
+  });
+  Array.from(navMenuItems).forEach((menuItem) => {
+    menuItem.addEventListener('click', () => clickHandlerMenuItem(menuItem));
   });
 
   function clickHandlerAddTaskButton() {
@@ -73,6 +78,25 @@ import './assets/css/index.css';
         storage.todos.filter((todo) => todo.project === project.title),
       );
     }
+  }
+
+  function clickHandlerMenuItem(elem) {
+    let filteredTodoList;
+    const criteria = elem
+      .querySelector('.menu-item-title')
+      .textContent.toUpperCase();
+    if (criteria === 'TODAY') {
+      filteredTodoList = storage.todos.filter((todo) => {
+        console.log('todo duedate = ', todo.dueDate);
+        console.log('todays data = ', format(new Date(), 'yyyy-MM-dd'));
+        return todo.dueDate === format(new Date(), 'yyyy-MM-dd');
+      });
+    } else if (criteria === 'UPCOMING') {
+      filteredTodoList = storage.todos.filter((todo) =>
+        isAfter(new Date(todo.dueDate), new Date()),
+      );
+    } else filteredTodoList = storage.todos;
+    updateTodoListDisplay(filteredTodoList);
   }
 
   pageContainer.append(header(), navComponent, main);

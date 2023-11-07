@@ -19,7 +19,7 @@ export default function navigation() {
   const todayLink = menuLink(
     'Today',
     storage.todos.filter(
-      (todo) => todo.dueDate === format(new Date(), 'yyyy-mm-dd'),
+      (todo) => todo.dueDate === format(new Date(), 'yyyy-MM-dd'),
     ).length,
     CalendarTodayIcon,
   );
@@ -49,6 +49,7 @@ export default function navigation() {
   projectsContainer.append(projectsHeader);
 
   addProjectButton.addEventListener('click', clickHandlerAddProject);
+  // allLink.addEventListener('click', )
   refreshProjectList();
 
   function refreshProjectList() {
