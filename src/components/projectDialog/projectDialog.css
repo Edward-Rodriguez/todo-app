@@ -71,7 +71,7 @@ input[name='project-title'] {
   /* display: none; */
   opacity: 0;
   overflow: hidden;
-  transition: opacity 150ms ease-in-out;
+  transition: opacity 150ms ease-in;
 }
 
 #dropdown .expanded {
