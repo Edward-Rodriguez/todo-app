@@ -11,7 +11,7 @@ import projectDialog from '../projectDialog/projectDialog';
 import fillIcons from './fillIcons';
 import './nav.css';
 
-export default function navigation() {
+export const navComponent = (() => {
   const storage = Storage();
   const nav = document.createElement('nav');
 
@@ -101,5 +101,7 @@ export default function navigation() {
 
   nav.appendChild(projectsContainer);
 
-  return nav;
-}
+  return { nav, refreshProjectList };
+})();
+
+export default navComponent;

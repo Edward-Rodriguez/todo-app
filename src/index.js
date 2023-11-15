@@ -18,6 +18,7 @@ import './assets/css/index.css';
   const addTaskIcon = document.createElement('img');
   const addTaskFilledIcon = document.createElement('img');
   const main = document.createElement('main');
+  let currentProject = null;
 
   updateTodoListDisplay(storage.todos);
 
@@ -33,9 +34,8 @@ import './assets/css/index.css';
   addTaskButton.prepend(addTaskFilledIcon);
   addTaskButton.addEventListener('click', clickHandlerAddTaskButton);
 
-  const navComponent = navigation();
-  const navMenuItems = navComponent.querySelectorAll('.menu-item');
-  const navProjectList = navComponent.querySelectorAll('[data-project-id]');
+  const navMenuItems = navigation.nav.querySelectorAll('.menu-item');
+  const navProjectList = navigation.nav.querySelectorAll('[data-project-id]');
 
   Array.from(navMenuItems).forEach((menuItem) => {
     menuItem.addEventListener('click', () => clickHandlerMenuItem(menuItem));
@@ -51,10 +51,19 @@ import './assets/css/index.css';
     editDialogBox.showModal();
     editDialogBox.addEventListener('close', () => {
       const todoExists = storage.todos.find((todo) => todo.id === newTodo.id);
-      if (todoExists) {
+      if (
+        todoExists &&
+        (todoExists.project === currentProject.title || !currentProject)
+      ) {
         main.insertBefore(todoComponent(todoExists), addTaskButton);
       }
     });
+    // filter todos if there is a current project selected
+    const todoListToDisplay = currentProject
+      ? storage.todos.filter((todo) => todo.project === currentProject.title)
+      : storage.todos;
+    updateTodoListDisplay(todoListToDisplay);
+    navigation.refreshProjectList();
   }
 
   // refresh list of todos displayed
@@ -74,6 +83,7 @@ import './assets/css/index.css';
         const parentMenuItem = ev.target.closest('[data-project-id]');
         return proj.id === +parentMenuItem.dataset.projectId;
       });
+      currentProject = project;
       updateTodoListDisplay(
         storage.todos.filter((todo) => todo.project === project.title),
       );
@@ -99,5 +109,5 @@ import './assets/css/index.css';
     updateTodoListDisplay(filteredTodoList);
   }
 
-  pageContainer.append(header(), navComponent, main);
+  pageContainer.append(header(), navigation.nav, main);
 })();
