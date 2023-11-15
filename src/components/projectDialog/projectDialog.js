@@ -112,7 +112,6 @@ export default function projectDialog() {
     if (inputTitle) {
       newProject.title = inputTitle;
       newProject.color = selectedColorName.textContent.toLowerCase();
-      newProject.todos = [];
       storage.addProject(newProject);
       projectDialogBox.close();
     }

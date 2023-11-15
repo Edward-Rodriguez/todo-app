@@ -37,11 +37,11 @@ import './assets/css/index.css';
   const navMenuItems = navComponent.querySelectorAll('.menu-item');
   const navProjectList = navComponent.querySelectorAll('[data-project-id]');
 
-  Array.from(navProjectList).forEach((navItem) => {
-    navItem.addEventListener('click', (ev) => clickHandlerNavProject(ev));
-  });
   Array.from(navMenuItems).forEach((menuItem) => {
     menuItem.addEventListener('click', () => clickHandlerMenuItem(menuItem));
+  });
+  Array.from(navProjectList).forEach((navItem) => {
+    navItem.addEventListener('click', (ev) => clickHandlerNavProject(ev));
   });
 
   function clickHandlerAddTaskButton() {
