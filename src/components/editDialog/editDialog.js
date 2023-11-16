@@ -49,10 +49,6 @@ export default function editDialog(todo) {
     ['Low', 'Medium', 'High'],
   );
 
-  const projectList = [];
-  Storage().projects.forEach((project) => {
-    projectList.push(project.title);
-  });
   const projectComponent = formComponent(
     'select',
     'Project',
@@ -60,7 +56,7 @@ export default function editDialog(todo) {
       name: 'project',
       id: 'project',
     },
-    projectList,
+    Storage().projects,
   );
 
   const selectionFormRow = document.createElement('div');
@@ -92,7 +88,7 @@ export default function editDialog(todo) {
     todo.notes = notesComponent.inputField.value;
     todo.dueDate = dueDateComponent.inputField.value;
     todo.priority = priorityComponent.inputField.value.toLowerCase();
-    todo.project = projectComponent.inputField.value;
+    todo.projectId = +projectComponent.inputField.value;
     const checklist = [];
     Array.from(checklistDiv.children).forEach((child) => {
       const textarea = child.querySelector("textarea[name='checklist'");

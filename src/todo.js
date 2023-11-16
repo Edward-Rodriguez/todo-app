@@ -3,9 +3,9 @@ export default function Todo(
   title = '',
   dueDate = null,
   priority = '',
-  project = 'Home',
+  projectId = -1,
   notes = null,
-  checklist = []
+  checklist = [],
 ) {
   function addChecklistItem(newChecklistItem) {
     checklist.push(newChecklistItem);
@@ -33,11 +33,11 @@ export default function Todo(
     set priority(newPriority) {
       priority = newPriority;
     },
-    get project() {
-      return project;
+    get projectId() {
+      return projectId;
     },
-    set project(newProject) {
-      project = newProject;
+    set projectId(newProject) {
+      projectId = newProject;
     },
     get notes() {
       return notes;

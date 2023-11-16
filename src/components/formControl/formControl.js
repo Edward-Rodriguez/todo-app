@@ -13,8 +13,13 @@ export default function formComponent(element, heading, attributes, options) {
   if (element === 'select' && options) {
     options.forEach((option) => {
       const optionElement = document.createElement('option');
-      optionElement.value = option;
-      optionElement.textContent = option;
+      if (attributes.id === 'project') {
+        optionElement.textContent = option.title;
+        optionElement.value = option.id;
+      } else {
+        optionElement.value = option;
+        optionElement.textContent = option;
+      }
       inputField.appendChild(optionElement);
     });
   }

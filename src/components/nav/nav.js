@@ -59,7 +59,7 @@ export const navComponent = (() => {
 
     storage.projects.forEach((project) => {
       const projectTodoCount = storage.todos.filter(
-        (todo) => todo.project === project.title,
+        (todo) => todo.projectId === project.id,
       ).length;
       const projectMenuLink = menuLink(
         project.title,
@@ -77,6 +77,13 @@ export const navComponent = (() => {
     });
   }
 
+  function refreshProjectTodoCount(projectId) {
+    const projectToUpdate = projectsContainer.querySelector(
+      `[data-project-id="${projectId}"]`,
+    );
+    //  const newCount = storage.todos.filter(todo => todo.project === )
+  }
+
   function clickHandlerDelete(ev) {
     const menuItemToRemove = ev.target.closest('.menu-item');
     const projectIdToRemove = menuItemToRemove.dataset.projectId;
@@ -88,7 +95,7 @@ export const navComponent = (() => {
 
     // remove all associated todo's from storage
     storage.todos = storage.todos.filter(
-      (todo) => todo.project !== projectToRemove.title,
+      (todo) => todo.projectId !== projectToRemove.id,
     );
   }
 

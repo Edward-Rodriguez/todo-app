@@ -20,7 +20,7 @@ import './assets/css/index.css';
   const main = document.createElement('main');
   let currentProject = null;
 
-  updateTodoListDisplay(storage.todos);
+  refreshTodoList(storage.todos);
 
   pageContainer.setAttribute('id', 'page-container');
   main.setAttribute('id', 'content');
@@ -53,21 +53,22 @@ import './assets/css/index.css';
       const todoExists = storage.todos.find((todo) => todo.id === newTodo.id);
       if (
         todoExists &&
-        (todoExists.project === currentProject.title || !currentProject)
+        (!currentProject || todoExists.projectId === currentProject.id)
       ) {
         main.insertBefore(todoComponent(todoExists), addTaskButton);
+        navigation.refreshProjectList();
       }
+      // filter todos if there is a current project selected
+      const todoListToDisplay = currentProject
+        ? storage.todos.filter((todo) => todo.projectId === currentProject.id)
+        : storage.todos;
+      refreshTodoList(todoListToDisplay);
+      navigation.refreshProjectList();
     });
-    // filter todos if there is a current project selected
-    const todoListToDisplay = currentProject
-      ? storage.todos.filter((todo) => todo.project === currentProject.title)
-      : storage.todos;
-    updateTodoListDisplay(todoListToDisplay);
-    navigation.refreshProjectList();
   }
 
   // refresh list of todos displayed
-  function updateTodoListDisplay(todoList) {
+  function refreshTodoList(todoList) {
     main.textContent = '';
     todoList.forEach((todo) => {
       main.appendChild(todoComponent(todo));
@@ -84,8 +85,8 @@ import './assets/css/index.css';
         return proj.id === +parentMenuItem.dataset.projectId;
       });
       currentProject = project;
-      updateTodoListDisplay(
-        storage.todos.filter((todo) => todo.project === project.title),
+      refreshTodoList(
+        storage.todos.filter((todo) => todo.projectId === project.id),
       );
     }
   }
@@ -96,17 +97,15 @@ import './assets/css/index.css';
       .querySelector('.menu-item-title')
       .textContent.toUpperCase();
     if (criteria === 'TODAY') {
-      filteredTodoList = storage.todos.filter((todo) => {
-        console.log('todo duedate = ', todo.dueDate);
-        console.log('todays data = ', format(new Date(), 'yyyy-MM-dd'));
-        return todo.dueDate === format(new Date(), 'yyyy-MM-dd');
-      });
+      filteredTodoList = storage.todos.filter(
+        (todo) => todo.dueDate === format(new Date(), 'yyyy-MM-dd'),
+      );
     } else if (criteria === 'UPCOMING') {
       filteredTodoList = storage.todos.filter((todo) =>
         isAfter(new Date(todo.dueDate), new Date()),
       );
     } else filteredTodoList = storage.todos;
-    updateTodoListDisplay(filteredTodoList);
+    refreshTodoList(filteredTodoList);
   }
 
   pageContainer.append(header(), navigation.nav, main);
