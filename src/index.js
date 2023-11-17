@@ -8,6 +8,7 @@ import { header } from './components/header/header';
 import editDialog from './components/editDialog/editDialog';
 import AddIcon from './assets/img/add_icon_green.svg';
 import AddFilledIcon from './assets/img/add_icon_green_filled.svg';
+import projectDialog from './components/projectDialog/projectDialog';
 import './assets/css/index.css';
 
 // eslint-disable-next-line wrap-iife
@@ -33,16 +34,22 @@ import './assets/css/index.css';
   addTaskButton.prepend(addTaskIcon);
   addTaskButton.prepend(addTaskFilledIcon);
   addTaskButton.addEventListener('click', clickHandlerAddTaskButton);
+  pageContainer.append(header(), navigation.nav, main);
 
-  const navMenuItems = navigation.nav.querySelectorAll('.menu-item');
-  const navProjectList = navigation.nav.querySelectorAll('[data-project-id]');
+  const addProjectButton = document.querySelector('#project-header button');
+  addProjectButton.addEventListener('click', clickHandlerAddProject);
+  initNavItems();
 
-  Array.from(navMenuItems).forEach((menuItem) => {
-    menuItem.addEventListener('click', () => clickHandlerMenuItem(menuItem));
-  });
-  Array.from(navProjectList).forEach((navItem) => {
-    navItem.addEventListener('click', (ev) => clickHandlerNavProject(ev));
-  });
+  function initNavItems() {
+    const navMenuItems = navigation.nav.querySelectorAll('.menu-item');
+    const navProjectList = navigation.nav.querySelectorAll('[data-project-id]');
+    Array.from(navMenuItems).forEach((menuItem) => {
+      menuItem.addEventListener('click', () => clickHandlerMenuItem(menuItem));
+    });
+    Array.from(navProjectList).forEach((navItem) => {
+      navItem.addEventListener('click', (ev) => clickHandlerNavProject(ev));
+    });
+  }
 
   function clickHandlerAddTaskButton() {
     const newTodo = Todo((storage.maxTodoId += 1));
@@ -109,5 +116,13 @@ import './assets/css/index.css';
     refreshTodoList(filteredTodoList);
   }
 
-  pageContainer.append(header(), navigation.nav, main);
+  function clickHandlerAddProject() {
+    const projectDialogBox = projectDialog();
+    document.documentElement.appendChild(projectDialogBox);
+    projectDialogBox.showModal();
+    projectDialogBox.addEventListener('close', () => {
+      navigation.refreshProjectList();
+      initNavItems();
+    });
+  }
 })();

@@ -48,7 +48,6 @@ export default function todoContainer(todo) {
 
     dropdownContainer.classList.add('dropdown', 'hidden');
     project.classList.add('project');
-    console.log(Storage().projects.find((proj) => proj.id === todo.projectId));
     project.textContent =
       Storage().projects.find((proj) => proj.id === todo.projectId).title || '';
     priority.classList.add('priority');

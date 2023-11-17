@@ -7,7 +7,6 @@ import CalendarIcon from './calendar_month_icon.svg';
 import CalendarUpcomingIcon from './event_upcoming_icon.svg';
 import CloseIconRed from '../../assets/img/close_icon_red.svg';
 import AddIconGreen from '../../assets/img/add_icon_green.svg';
-import projectDialog from '../projectDialog/projectDialog';
 import fillIcons from './fillIcons';
 import './nav.css';
 
@@ -41,8 +40,6 @@ export const navComponent = (() => {
   projectsHeader.append(heading, addProjectButton);
   projectsContainer.append(projectsHeader);
 
-  addProjectButton.addEventListener('click', clickHandlerAddProject);
-  // allLink.addEventListener('click', )
   refreshProjectList();
 
   function refreshProjectList() {
@@ -118,16 +115,9 @@ export const navComponent = (() => {
     );
   }
 
-  function clickHandlerAddProject() {
-    const projectDialogBox = projectDialog();
-    document.documentElement.appendChild(projectDialogBox);
-    projectDialogBox.showModal();
-    projectDialogBox.addEventListener('close', () => refreshProjectList());
-  }
-
   nav.appendChild(projectsContainer);
 
-  return { nav, refreshAllTodoCounts };
+  return { nav, refreshAllTodoCounts, refreshProjectList };
 })();
 
 export default navComponent;
