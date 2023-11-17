@@ -56,14 +56,15 @@ import './assets/css/index.css';
         (!currentProject || todoExists.projectId === currentProject.id)
       ) {
         main.insertBefore(todoComponent(todoExists), addTaskButton);
-        navigation.refreshProjectList();
+        navigation.refreshAllTodoCounts();
       }
       // filter todos if there is a current project selected
       const todoListToDisplay = currentProject
         ? storage.todos.filter((todo) => todo.projectId === currentProject.id)
         : storage.todos;
       refreshTodoList(todoListToDisplay);
-      navigation.refreshProjectList();
+      // navigation.refreshProjectList();
+      navigation.refreshAllTodoCounts();
     });
   }
 

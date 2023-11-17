@@ -16,17 +16,10 @@ export const navComponent = (() => {
   const nav = document.createElement('nav');
 
   const allLink = menuLink('All', storage.todos.length, CalendarIcon);
-  const todayLink = menuLink(
-    'Today',
-    storage.todos.filter(
-      (todo) => todo.dueDate === format(new Date(), 'yyyy-MM-dd'),
-    ).length,
-    CalendarTodayIcon,
-  );
+  const todayLink = menuLink('Today', getTodayTodoCount(), CalendarTodayIcon);
   const upcomingLink = menuLink(
     'Upcoming',
-    storage.todos.filter((todo) => isAfter(new Date(todo.dueDate), new Date()))
-      .length,
+    getUpcomingTodoCount(),
     CalendarUpcomingIcon,
   );
   nav.setAttribute('id', 'sidebar-menu');
@@ -77,11 +70,37 @@ export const navComponent = (() => {
     });
   }
 
-  function refreshProjectTodoCount(projectId) {
-    const projectToUpdate = projectsContainer.querySelector(
-      `[data-project-id="${projectId}"]`,
-    );
-    //  const newCount = storage.todos.filter(todo => todo.project === )
+  function refreshAllTodoCounts() {
+    // update todo count next to all/today/upcoming menu items
+    allLink.querySelector('.menu-item-count').textContent =
+      storage.todos.length;
+    todayLink.querySelector('.menu-item-count').textContent =
+      getTodayTodoCount();
+    upcomingLink.querySelector('.menu-item-count').textContent =
+      getUpcomingTodoCount();
+
+    // update the todo count displayed next to project
+    const projectList = projectsContainer.querySelectorAll('[data-project-id]');
+    Array.from(projectList).forEach((project) => {
+      const projectComponent = project;
+      const todoCount = storage.todos.filter(
+        (todo) => todo.projectId === +projectComponent.dataset.projectId,
+      ).length;
+      projectComponent.querySelector('.menu-item-count').textContent =
+        todoCount;
+    });
+  }
+
+  function getTodayTodoCount() {
+    return storage.todos.filter(
+      (todo) => todo.dueDate === format(new Date(), 'yyyy-MM-dd'),
+    ).length;
+  }
+
+  function getUpcomingTodoCount() {
+    return storage.todos.filter((todo) =>
+      isAfter(new Date(todo.dueDate), new Date()),
+    ).length;
   }
 
   function clickHandlerDelete(ev) {
@@ -108,7 +127,7 @@ export const navComponent = (() => {
 
   nav.appendChild(projectsContainer);
 
-  return { nav, refreshProjectList };
+  return { nav, refreshAllTodoCounts };
 })();
 
 export default navComponent;
