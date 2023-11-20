@@ -1,4 +1,10 @@
-export default function formComponent(element, heading, attributes, options) {
+export default function formComponent(
+  element,
+  heading,
+  attributes,
+  options,
+  defaultProject,
+) {
   const formRow = document.createElement('div');
   const inputField = document.createElement(element);
   const label = document.createElement('label');
@@ -16,12 +22,21 @@ export default function formComponent(element, heading, attributes, options) {
       if (attributes.id === 'project') {
         optionElement.textContent = option.title;
         optionElement.value = option.id;
+        if (defaultProject && defaultProject === option.title)
+          optionElement.setAttribute('selected', '');
       } else {
         optionElement.value = option;
         optionElement.textContent = option;
       }
       inputField.appendChild(optionElement);
     });
+    if (attributes.id === 'project') {
+      const noneOption = document.createElement('option');
+      noneOption.textContent = 'None';
+      noneOption.classList.add('none-option');
+      inputField.prepend(noneOption);
+      if (!defaultProject) noneOption.setAttribute('selected', '');
+    }
   }
 
   function setAttributes(elem, attrs) {

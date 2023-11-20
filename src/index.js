@@ -122,7 +122,7 @@ import './assets/css/index.css';
     projectDialogBox.showModal();
     projectDialogBox.addEventListener('close', () => {
       navigation.refreshProjectList();
-      initNavItems();
+      initNavItems(); // to add event handlers to new projects
     });
   }
 })();

@@ -3,7 +3,7 @@ export default function Todo(
   title = '',
   dueDate = null,
   priority = '',
-  projectId = -1,
+  projectId = null,
   notes = null,
   checklist = [],
 ) {

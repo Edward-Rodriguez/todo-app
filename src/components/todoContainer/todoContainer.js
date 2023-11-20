@@ -48,8 +48,9 @@ export default function todoContainer(todo) {
 
     dropdownContainer.classList.add('dropdown', 'hidden');
     project.classList.add('project');
-    project.textContent =
-      Storage().projects.find((proj) => proj.id === todo.projectId).title || '';
+    project.textContent = todo.projectId
+      ? Storage().projects.find((proj) => proj.id === todo.projectId).title
+      : '';
     priority.classList.add('priority');
     priority.textContent = `Priority: ${todo.priority}`;
     editImage.src = EditIcon;
