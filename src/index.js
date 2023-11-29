@@ -19,6 +19,7 @@ import './assets/css/index.css';
   const addTaskIcon = document.createElement('img');
   const addTaskFilledIcon = document.createElement('img');
   const main = document.createElement('main');
+  const projectHeader = document.createElement('h3');
   let currentProject = null;
 
   refreshTodoList(storage.todos);
@@ -70,7 +71,6 @@ import './assets/css/index.css';
         ? storage.todos.filter((todo) => todo.projectId === currentProject.id)
         : storage.todos;
       refreshTodoList(todoListToDisplay);
-      // navigation.refreshProjectList();
       navigation.refreshAllTodoCounts();
     });
   }
@@ -78,6 +78,8 @@ import './assets/css/index.css';
   // refresh list of todos displayed
   function refreshTodoList(todoList) {
     main.textContent = '';
+    main.appendChild(projectHeader);
+    updateProjectHeader();
     todoList.forEach((todo) => {
       main.appendChild(todoComponent(todo));
     });
@@ -101,6 +103,8 @@ import './assets/css/index.css';
 
   function clickHandlerMenuItem(elem) {
     let filteredTodoList;
+    let newProjectHeading;
+    currentProject = null;
     const criteria = elem
       .querySelector('.menu-item-title')
       .textContent.toUpperCase();
@@ -108,12 +112,20 @@ import './assets/css/index.css';
       filteredTodoList = storage.todos.filter(
         (todo) => todo.dueDate === format(new Date(), 'yyyy-MM-dd'),
       );
+      const dot = '\u{00B7}';
+      newProjectHeading = `Today ${dot} ${format(
+        new Date(),
+        'MMM d',
+      )} ${dot} ${format(new Date(), 'EEEE')}`;
+      updateProjectHeader(newProjectHeading);
     } else if (criteria === 'UPCOMING') {
       filteredTodoList = storage.todos.filter((todo) =>
         isAfter(new Date(todo.dueDate), new Date()),
       );
+      newProjectHeading = 'Upcoming';
     } else filteredTodoList = storage.todos;
     refreshTodoList(filteredTodoList);
+    updateProjectHeader(newProjectHeading);
   }
 
   function clickHandlerAddProject() {
@@ -124,5 +136,11 @@ import './assets/css/index.css';
       navigation.refreshProjectList();
       initNavItems(); // to add event handlers to new projects
     });
+  }
+
+  function updateProjectHeader(newHeading) {
+    if (currentProject) {
+      projectHeader.textContent = currentProject.title;
+    } else projectHeader.textContent = newHeading;
   }
 })();
