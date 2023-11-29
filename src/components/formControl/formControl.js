@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 export default function formComponent(
   element,
   heading,

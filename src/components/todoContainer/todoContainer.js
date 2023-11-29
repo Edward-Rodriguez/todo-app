@@ -5,6 +5,7 @@ import EditIcon from './edit-icon.svg';
 import Storage from '../../storage';
 import './todoContainer.css';
 import editDialog from '../editDialog/editDialog';
+import navComponent from '../nav/nav';
 
 export default function todoContainer(todo) {
   const todoDiv = document.createElement('div');
@@ -88,6 +89,7 @@ export default function todoContainer(todo) {
       editDialogBox.showModal();
       editDialogBox.addEventListener('close', () => {
         reloadTodo();
+        navComponent.refreshAllTodoCounts();
       });
     }
 
